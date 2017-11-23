@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.SysEmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.SysEmployee">
+    <id column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="DEPARTMENT_ID" jdbcType="VARCHAR" property="departmentId" />
+    <result column="EMPLOYEE_NAME" jdbcType="VARCHAR" property="employeeName" />
+    <result column="EMPLOYEE_GENDER" jdbcType="VARCHAR" property="employeeGender" />
+    <result column="EMPLOYEE_BIRTH" jdbcType="TIMESTAMP" property="employeeBirth" />
+    <result column="EMPLOYEE_IDCARD" jdbcType="VARCHAR" property="employeeIdcard" />
+    <result column="EMPLOYEE_PHONE" jdbcType="VARCHAR" property="employeePhone" />
+    <result column="EMPLOYEE_EMAIL" jdbcType="VARCHAR" property="employeeEmail" />
+    <result column="JOB_NUM" jdbcType="VARCHAR" property="jobNum" />
+    <result column="JOB_NAME" jdbcType="VARCHAR" property="jobName" />
+    <result column="ENTRY_TIME" jdbcType="TIMESTAMP" property="entryTime" />
+    <result column="EMPLOYEE_STATUS" jdbcType="VARCHAR" property="employeeStatus" />
+    <result column="EMPLOYEE_PASSWORD" jdbcType="VARCHAR" property="employeePassword" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "EMPLOYEE_ID", "DEPARTMENT_ID", "EMPLOYEE_NAME", "EMPLOYEE_GENDER", "EMPLOYEE_BIRTH", 
+    "EMPLOYEE_IDCARD", "EMPLOYEE_PHONE", "EMPLOYEE_EMAIL", "JOB_NUM", "JOB_NAME", "ENTRY_TIME", 
+    "EMPLOYEE_STATUS", "EMPLOYEE_PASSWORD"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.SysEmployeeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_EMPLOYEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_EMPLOYEE
+    where "EMPLOYEE_ID" = #{employeeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_EMPLOYEE
+    where "EMPLOYEE_ID" = #{employeeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.SysEmployeeExample">
+    delete from SYS_EMPLOYEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.SysEmployee">
+    insert into SYS_EMPLOYEE ("EMPLOYEE_ID", "DEPARTMENT_ID", "EMPLOYEE_NAME", 
+      "EMPLOYEE_GENDER", "EMPLOYEE_BIRTH", "EMPLOYEE_IDCARD", 
+      "EMPLOYEE_PHONE", "EMPLOYEE_EMAIL", "JOB_NUM", 
+      "JOB_NAME", "ENTRY_TIME", "EMPLOYEE_STATUS", 
+      "EMPLOYEE_PASSWORD")
+    values (#{employeeId,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR}, #{employeeName,jdbcType=VARCHAR}, 
+      #{employeeGender,jdbcType=VARCHAR}, #{employeeBirth,jdbcType=TIMESTAMP}, #{employeeIdcard,jdbcType=VARCHAR}, 
+      #{employeePhone,jdbcType=VARCHAR}, #{employeeEmail,jdbcType=VARCHAR}, #{jobNum,jdbcType=VARCHAR}, 
+      #{jobName,jdbcType=VARCHAR}, #{entryTime,jdbcType=TIMESTAMP}, #{employeeStatus,jdbcType=VARCHAR}, 
+      #{employeePassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.SysEmployee">
+    insert into SYS_EMPLOYEE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        "EMPLOYEE_ID",
+      </if>
+      <if test="departmentId != null">
+        "DEPARTMENT_ID",
+      </if>
+      <if test="employeeName != null">
+        "EMPLOYEE_NAME",
+      </if>
+      <if test="employeeGender != null">
+        "EMPLOYEE_GENDER",
+      </if>
+      <if test="employeeBirth != null">
+        "EMPLOYEE_BIRTH",
+      </if>
+      <if test="employeeIdcard != null">
+        "EMPLOYEE_IDCARD",
+      </if>
+      <if test="employeePhone != null">
+        "EMPLOYEE_PHONE",
+      </if>
+      <if test="employeeEmail != null">
+        "EMPLOYEE_EMAIL",
+      </if>
+      <if test="jobNum != null">
+        "JOB_NUM",
+      </if>
+      <if test="jobName != null">
+        "JOB_NAME",
+      </if>
+      <if test="entryTime != null">
+        "ENTRY_TIME",
+      </if>
+      <if test="employeeStatus != null">
+        "EMPLOYEE_STATUS",
+      </if>
+      <if test="employeePassword != null">
+        "EMPLOYEE_PASSWORD",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeName != null">
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeGender != null">
+        #{employeeGender,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeBirth != null">
+        #{employeeBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeIdcard != null">
+        #{employeeIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePhone != null">
+        #{employeePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeEmail != null">
+        #{employeeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="jobNum != null">
+        #{jobNum,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null">
+        #{entryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeStatus != null">
+        #{employeeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePassword != null">
+        #{employeePassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.SysEmployeeExample" resultType="java.lang.Long">
+    select count(*) from SYS_EMPLOYEE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_EMPLOYEE
+    <set>
+      <if test="record.employeeId != null">
+        "EMPLOYEE_ID" = #{record.employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentId != null">
+        "DEPARTMENT_ID" = #{record.departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeName != null">
+        "EMPLOYEE_NAME" = #{record.employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeGender != null">
+        "EMPLOYEE_GENDER" = #{record.employeeGender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeBirth != null">
+        "EMPLOYEE_BIRTH" = #{record.employeeBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.employeeIdcard != null">
+        "EMPLOYEE_IDCARD" = #{record.employeeIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeePhone != null">
+        "EMPLOYEE_PHONE" = #{record.employeePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeEmail != null">
+        "EMPLOYEE_EMAIL" = #{record.employeeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobNum != null">
+        "JOB_NUM" = #{record.jobNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobName != null">
+        "JOB_NAME" = #{record.jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entryTime != null">
+        "ENTRY_TIME" = #{record.entryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.employeeStatus != null">
+        "EMPLOYEE_STATUS" = #{record.employeeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeePassword != null">
+        "EMPLOYEE_PASSWORD" = #{record.employeePassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_EMPLOYEE
+    set "EMPLOYEE_ID" = #{record.employeeId,jdbcType=VARCHAR},
+      "DEPARTMENT_ID" = #{record.departmentId,jdbcType=VARCHAR},
+      "EMPLOYEE_NAME" = #{record.employeeName,jdbcType=VARCHAR},
+      "EMPLOYEE_GENDER" = #{record.employeeGender,jdbcType=VARCHAR},
+      "EMPLOYEE_BIRTH" = #{record.employeeBirth,jdbcType=TIMESTAMP},
+      "EMPLOYEE_IDCARD" = #{record.employeeIdcard,jdbcType=VARCHAR},
+      "EMPLOYEE_PHONE" = #{record.employeePhone,jdbcType=VARCHAR},
+      "EMPLOYEE_EMAIL" = #{record.employeeEmail,jdbcType=VARCHAR},
+      "JOB_NUM" = #{record.jobNum,jdbcType=VARCHAR},
+      "JOB_NAME" = #{record.jobName,jdbcType=VARCHAR},
+      "ENTRY_TIME" = #{record.entryTime,jdbcType=TIMESTAMP},
+      "EMPLOYEE_STATUS" = #{record.employeeStatus,jdbcType=VARCHAR},
+      "EMPLOYEE_PASSWORD" = #{record.employeePassword,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.SysEmployee">
+    update SYS_EMPLOYEE
+    <set>
+      <if test="departmentId != null">
+        "DEPARTMENT_ID" = #{departmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeName != null">
+        "EMPLOYEE_NAME" = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeGender != null">
+        "EMPLOYEE_GENDER" = #{employeeGender,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeBirth != null">
+        "EMPLOYEE_BIRTH" = #{employeeBirth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeIdcard != null">
+        "EMPLOYEE_IDCARD" = #{employeeIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePhone != null">
+        "EMPLOYEE_PHONE" = #{employeePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeEmail != null">
+        "EMPLOYEE_EMAIL" = #{employeeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="jobNum != null">
+        "JOB_NUM" = #{jobNum,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        "JOB_NAME" = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="entryTime != null">
+        "ENTRY_TIME" = #{entryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeStatus != null">
+        "EMPLOYEE_STATUS" = #{employeeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePassword != null">
+        "EMPLOYEE_PASSWORD" = #{employeePassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "EMPLOYEE_ID" = #{employeeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.SysEmployee">
+    update SYS_EMPLOYEE
+    set "DEPARTMENT_ID" = #{departmentId,jdbcType=VARCHAR},
+      "EMPLOYEE_NAME" = #{employeeName,jdbcType=VARCHAR},
+      "EMPLOYEE_GENDER" = #{employeeGender,jdbcType=VARCHAR},
+      "EMPLOYEE_BIRTH" = #{employeeBirth,jdbcType=TIMESTAMP},
+      "EMPLOYEE_IDCARD" = #{employeeIdcard,jdbcType=VARCHAR},
+      "EMPLOYEE_PHONE" = #{employeePhone,jdbcType=VARCHAR},
+      "EMPLOYEE_EMAIL" = #{employeeEmail,jdbcType=VARCHAR},
+      "JOB_NUM" = #{jobNum,jdbcType=VARCHAR},
+      "JOB_NAME" = #{jobName,jdbcType=VARCHAR},
+      "ENTRY_TIME" = #{entryTime,jdbcType=TIMESTAMP},
+      "EMPLOYEE_STATUS" = #{employeeStatus,jdbcType=VARCHAR},
+      "EMPLOYEE_PASSWORD" = #{employeePassword,jdbcType=VARCHAR}
+    where "EMPLOYEE_ID" = #{employeeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

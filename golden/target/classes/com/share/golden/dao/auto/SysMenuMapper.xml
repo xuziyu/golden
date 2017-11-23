@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.SysMenuMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.SysMenu">
+    <id column="MENU_ID" jdbcType="VARCHAR" property="menuId" />
+    <result column="MODULE_ID" jdbcType="VARCHAR" property="moduleId" />
+    <result column="CODE" jdbcType="VARCHAR" property="code" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="ENABLED" jdbcType="DECIMAL" property="enabled" />
+    <result column="MENU_URL" jdbcType="VARCHAR" property="menuUrl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "MENU_ID", "MODULE_ID", "CODE", "NAME", "ENABLED", "MENU_URL"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.SysMenuExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_MENU
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_MENU
+    where "MENU_ID" = #{menuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_MENU
+    where "MENU_ID" = #{menuId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.SysMenuExample">
+    delete from SYS_MENU
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.SysMenu">
+    insert into SYS_MENU ("MENU_ID", "MODULE_ID", "CODE", 
+      "NAME", "ENABLED", "MENU_URL"
+      )
+    values (#{menuId,jdbcType=VARCHAR}, #{moduleId,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{enabled,jdbcType=DECIMAL}, #{menuUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.SysMenu">
+    insert into SYS_MENU
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        "MENU_ID",
+      </if>
+      <if test="moduleId != null">
+        "MODULE_ID",
+      </if>
+      <if test="code != null">
+        "CODE",
+      </if>
+      <if test="name != null">
+        "NAME",
+      </if>
+      <if test="enabled != null">
+        "ENABLED",
+      </if>
+      <if test="menuUrl != null">
+        "MENU_URL",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="menuId != null">
+        #{menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleId != null">
+        #{moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        #{enabled,jdbcType=DECIMAL},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.SysMenuExample" resultType="java.lang.Long">
+    select count(*) from SYS_MENU
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_MENU
+    <set>
+      <if test="record.menuId != null">
+        "MENU_ID" = #{record.menuId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moduleId != null">
+        "MODULE_ID" = #{record.moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null">
+        "CODE" = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        "NAME" = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enabled != null">
+        "ENABLED" = #{record.enabled,jdbcType=DECIMAL},
+      </if>
+      <if test="record.menuUrl != null">
+        "MENU_URL" = #{record.menuUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_MENU
+    set "MENU_ID" = #{record.menuId,jdbcType=VARCHAR},
+      "MODULE_ID" = #{record.moduleId,jdbcType=VARCHAR},
+      "CODE" = #{record.code,jdbcType=VARCHAR},
+      "NAME" = #{record.name,jdbcType=VARCHAR},
+      "ENABLED" = #{record.enabled,jdbcType=DECIMAL},
+      "MENU_URL" = #{record.menuUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.SysMenu">
+    update SYS_MENU
+    <set>
+      <if test="moduleId != null">
+        "MODULE_ID" = #{moduleId,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        "CODE" = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        "NAME" = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null">
+        "ENABLED" = #{enabled,jdbcType=DECIMAL},
+      </if>
+      <if test="menuUrl != null">
+        "MENU_URL" = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "MENU_ID" = #{menuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.SysMenu">
+    update SYS_MENU
+    set "MODULE_ID" = #{moduleId,jdbcType=VARCHAR},
+      "CODE" = #{code,jdbcType=VARCHAR},
+      "NAME" = #{name,jdbcType=VARCHAR},
+      "ENABLED" = #{enabled,jdbcType=DECIMAL},
+      "MENU_URL" = #{menuUrl,jdbcType=VARCHAR}
+    where "MENU_ID" = #{menuId,jdbcType=VARCHAR}
+  </update>
+</mapper>

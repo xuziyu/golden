@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<properties resource="conf/jdbc.properties" />
+
+	<context id="oracleTables" targetRuntime="MyBatis3">
+		<property name="beginningDelimiter" value="&quot;" />
+		<property name="endingDelimiter" value="&quot;" />
+		<commentGenerator>
+			<property name="suppressDate" value="true" />
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+
+		</commentGenerator>
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@10.2.40.248:1521:orcl" userId="lx"
+			password="1234" />
+
+		<!--指定生成的类型为java类型，避免数据库中number等类型字段 -->
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!--自动生成的实体的存放包路径 -->
+		<javaModelGenerator targetPackage="com.share.golden.entity"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<!--自动生成的*Mapper.xml文件存放路径 -->
+		<sqlMapGenerator targetPackage="com.share.golden.dao.auto"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!--自动生成的*Mapper.java存放路径 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.share.golden.dao.auto" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- <table tableName="BAS_BORROW_MONEY" delimitAllColumns="true" domainObjectName="BasBorrowMoney" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="BAS_INVESTMENT_INFORMATION" delimitAllColumns="true" 
+			domainObjectName="BasInvestmentInformation" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="BAS_PRODUCT" delimitAllColumns="true" domainObjectName="BasProduct" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="BAS_REPAYMENT" delimitAllColumns="true" domainObjectName="BasRepayment" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="BAS_TENDER_INFORMATION" delimitAllColumns="true" 
+			domainObjectName="BasTenderInformation" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="BAS_USER" delimitAllColumns="true" domainObjectName="BasUser" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_DEPARTMENT" delimitAllColumns="true" domainObjectName="SysDepartment" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_EMPLOYEE" delimitAllColumns="true" domainObjectName="SysEmployee" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_EMPLOYEE_ROLE" delimitAllColumns="true" domainObjectName="SysEmployeeRole" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_FEEDBACK" delimitAllColumns="true" domainObjectName="SysFeedback" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_IDENTITY_DATA" delimitAllColumns="true" domainObjectName="SysIdentityData" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_LOG" delimitAllColumns="true" domainObjectName="SysLog" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_MAIN_ACCOUT" delimitAllColumns="true" domainObjectName="SysMainAccout" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_MENU" delimitAllColumns="true" domainObjectName="SysMenu" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_MODULE" delimitAllColumns="true" domainObjectName="SysModule" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_NET_BANK" delimitAllColumns="true" domainObjectName="SysNetBank" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_PHONE_DATA" delimitAllColumns="true" domainObjectName="SysPhoneData" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_POUNDAGE" delimitAllColumns="true" domainObjectName="SysPoundage" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_RECHARGE" delimitAllColumns="true" domainObjectName="SysRecharge" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_RECOMMEND" delimitAllColumns="true" domainObjectName="SysRecommend" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_ROLE" delimitAllColumns="true" domainObjectName="SysRole" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_ROLE_MENU" delimitAllColumns="true" domainObjectName="SysRoleMenu" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_TRADE" delimitAllColumns="true" domainObjectName="SysTrade" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="SYS_VIP" delimitAllColumns="true" domainObjectName="SysVip" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="USER_ACCOUNT_ASSETS" delimitAllColumns="true" domainObjectName="UserAccountAssets" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="USER_APPLY_FOR_LIMIT" delimitAllColumns="true" domainObjectName="UserApplyForLimit" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="USER_BANK_CARD" delimitAllColumns="true" domainObjectName="UserBankCard" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="USER_CONTACT" delimitAllColumns="true" domainObjectName="UserContact" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="USER_CREDIT_LIMIT" delimitAllColumns="true" domainObjectName="UserCreditLimit" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="USER_EDUCATION" delimitAllColumns="true" domainObjectName="UserEducation" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="USER_INTEGRAL" delimitAllColumns="true" domainObjectName="UserIntegral" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="USER_MATERIAL_CERTIFICATION" delimitAllColumns="true" 
+			domainObjectName="UserMaterialCertification" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="USER_REAL_NAME" delimitAllColumns="true" domainObjectName="UserRealName" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<!-- <table tableName="USER_WITHDRAW" delimitAllColumns="true" domainObjectName="UserWithdraw" -->
+		<!-- enableCountByExample="true" enableUpdateByExample="true" -->
+		<!-- enableDeleteByExample="true" enableSelectByExample="true" modelType="flat"> -->
+		<!-- </table> -->
+		<table tableName="USER_TELEPHONE" delimitAllColumns="true"
+			domainObjectName="UserTelephone" enableCountByExample="true"
+			enableUpdateByExample="true" enableDeleteByExample="true"
+			enableSelectByExample="true" modelType="flat">
+		</table>
+	</context>
+</generatorConfiguration>

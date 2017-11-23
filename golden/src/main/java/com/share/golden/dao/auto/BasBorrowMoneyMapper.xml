@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.BasBorrowMoneyMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.BasBorrowMoney">
+    <id column="BORROW_ID" jdbcType="VARCHAR" property="borrowId" />
+    <result column="BORROW_SERIAL" jdbcType="VARCHAR" property="borrowSerial" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="BORROW_COMPANY" jdbcType="VARCHAR" property="borrowCompany" />
+    <result column="BORROW_MONEY" jdbcType="VARCHAR" property="borrowMoney" />
+    <result column="BORROW_RATE" jdbcType="VARCHAR" property="borrowRate" />
+    <result column="TIME_LIMIT" jdbcType="VARCHAR" property="timeLimit" />
+    <result column="BORROW_LIMIT" jdbcType="VARCHAR" property="borrowLimit" />
+    <result column="BORROW_STATE" jdbcType="VARCHAR" property="borrowState" />
+    <result column="BORROW_RECOMMEND" jdbcType="VARCHAR" property="borrowRecommend" />
+    <result column="BORROW_TYPE" jdbcType="VARCHAR" property="borrowType" />
+    <result column="BORROW_REMARK1" jdbcType="VARCHAR" property="borrowRemark1" />
+    <result column="BORROW_REMARK2" jdbcType="VARCHAR" property="borrowRemark2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "BORROW_ID", "BORROW_SERIAL", "USER_ID", "BORROW_COMPANY", "BORROW_MONEY", "BORROW_RATE", 
+    "TIME_LIMIT", "BORROW_LIMIT", "BORROW_STATE", "BORROW_RECOMMEND", "BORROW_TYPE", 
+    "BORROW_REMARK1", "BORROW_REMARK2"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.BasBorrowMoneyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BAS_BORROW_MONEY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BAS_BORROW_MONEY
+    where "BORROW_ID" = #{borrowId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BAS_BORROW_MONEY
+    where "BORROW_ID" = #{borrowId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.BasBorrowMoneyExample">
+    delete from BAS_BORROW_MONEY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.BasBorrowMoney">
+    insert into BAS_BORROW_MONEY ("BORROW_ID", "BORROW_SERIAL", "USER_ID", 
+      "BORROW_COMPANY", "BORROW_MONEY", "BORROW_RATE", 
+      "TIME_LIMIT", "BORROW_LIMIT", "BORROW_STATE", 
+      "BORROW_RECOMMEND", "BORROW_TYPE", "BORROW_REMARK1", 
+      "BORROW_REMARK2")
+    values (#{borrowId,jdbcType=VARCHAR}, #{borrowSerial,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{borrowCompany,jdbcType=VARCHAR}, #{borrowMoney,jdbcType=VARCHAR}, #{borrowRate,jdbcType=VARCHAR}, 
+      #{timeLimit,jdbcType=VARCHAR}, #{borrowLimit,jdbcType=VARCHAR}, #{borrowState,jdbcType=VARCHAR}, 
+      #{borrowRecommend,jdbcType=VARCHAR}, #{borrowType,jdbcType=VARCHAR}, #{borrowRemark1,jdbcType=VARCHAR}, 
+      #{borrowRemark2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.BasBorrowMoney">
+    insert into BAS_BORROW_MONEY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="borrowId != null">
+        "BORROW_ID",
+      </if>
+      <if test="borrowSerial != null">
+        "BORROW_SERIAL",
+      </if>
+      <if test="userId != null">
+        "USER_ID",
+      </if>
+      <if test="borrowCompany != null">
+        "BORROW_COMPANY",
+      </if>
+      <if test="borrowMoney != null">
+        "BORROW_MONEY",
+      </if>
+      <if test="borrowRate != null">
+        "BORROW_RATE",
+      </if>
+      <if test="timeLimit != null">
+        "TIME_LIMIT",
+      </if>
+      <if test="borrowLimit != null">
+        "BORROW_LIMIT",
+      </if>
+      <if test="borrowState != null">
+        "BORROW_STATE",
+      </if>
+      <if test="borrowRecommend != null">
+        "BORROW_RECOMMEND",
+      </if>
+      <if test="borrowType != null">
+        "BORROW_TYPE",
+      </if>
+      <if test="borrowRemark1 != null">
+        "BORROW_REMARK1",
+      </if>
+      <if test="borrowRemark2 != null">
+        "BORROW_REMARK2",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="borrowId != null">
+        #{borrowId,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowSerial != null">
+        #{borrowSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowCompany != null">
+        #{borrowCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowMoney != null">
+        #{borrowMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowRate != null">
+        #{borrowRate,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLimit != null">
+        #{timeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowLimit != null">
+        #{borrowLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowState != null">
+        #{borrowState,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowRecommend != null">
+        #{borrowRecommend,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowType != null">
+        #{borrowType,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowRemark1 != null">
+        #{borrowRemark1,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowRemark2 != null">
+        #{borrowRemark2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.BasBorrowMoneyExample" resultType="java.lang.Long">
+    select count(*) from BAS_BORROW_MONEY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update BAS_BORROW_MONEY
+    <set>
+      <if test="record.borrowId != null">
+        "BORROW_ID" = #{record.borrowId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowSerial != null">
+        "BORROW_SERIAL" = #{record.borrowSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowCompany != null">
+        "BORROW_COMPANY" = #{record.borrowCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowMoney != null">
+        "BORROW_MONEY" = #{record.borrowMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowRate != null">
+        "BORROW_RATE" = #{record.borrowRate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeLimit != null">
+        "TIME_LIMIT" = #{record.timeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowLimit != null">
+        "BORROW_LIMIT" = #{record.borrowLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowState != null">
+        "BORROW_STATE" = #{record.borrowState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowRecommend != null">
+        "BORROW_RECOMMEND" = #{record.borrowRecommend,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowType != null">
+        "BORROW_TYPE" = #{record.borrowType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowRemark1 != null">
+        "BORROW_REMARK1" = #{record.borrowRemark1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.borrowRemark2 != null">
+        "BORROW_REMARK2" = #{record.borrowRemark2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update BAS_BORROW_MONEY
+    set "BORROW_ID" = #{record.borrowId,jdbcType=VARCHAR},
+      "BORROW_SERIAL" = #{record.borrowSerial,jdbcType=VARCHAR},
+      "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      "BORROW_COMPANY" = #{record.borrowCompany,jdbcType=VARCHAR},
+      "BORROW_MONEY" = #{record.borrowMoney,jdbcType=VARCHAR},
+      "BORROW_RATE" = #{record.borrowRate,jdbcType=VARCHAR},
+      "TIME_LIMIT" = #{record.timeLimit,jdbcType=VARCHAR},
+      "BORROW_LIMIT" = #{record.borrowLimit,jdbcType=VARCHAR},
+      "BORROW_STATE" = #{record.borrowState,jdbcType=VARCHAR},
+      "BORROW_RECOMMEND" = #{record.borrowRecommend,jdbcType=VARCHAR},
+      "BORROW_TYPE" = #{record.borrowType,jdbcType=VARCHAR},
+      "BORROW_REMARK1" = #{record.borrowRemark1,jdbcType=VARCHAR},
+      "BORROW_REMARK2" = #{record.borrowRemark2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.BasBorrowMoney">
+    update BAS_BORROW_MONEY
+    <set>
+      <if test="borrowSerial != null">
+        "BORROW_SERIAL" = #{borrowSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        "USER_ID" = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowCompany != null">
+        "BORROW_COMPANY" = #{borrowCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowMoney != null">
+        "BORROW_MONEY" = #{borrowMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowRate != null">
+        "BORROW_RATE" = #{borrowRate,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLimit != null">
+        "TIME_LIMIT" = #{timeLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowLimit != null">
+        "BORROW_LIMIT" = #{borrowLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowState != null">
+        "BORROW_STATE" = #{borrowState,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowRecommend != null">
+        "BORROW_RECOMMEND" = #{borrowRecommend,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowType != null">
+        "BORROW_TYPE" = #{borrowType,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowRemark1 != null">
+        "BORROW_REMARK1" = #{borrowRemark1,jdbcType=VARCHAR},
+      </if>
+      <if test="borrowRemark2 != null">
+        "BORROW_REMARK2" = #{borrowRemark2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "BORROW_ID" = #{borrowId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.BasBorrowMoney">
+    update BAS_BORROW_MONEY
+    set "BORROW_SERIAL" = #{borrowSerial,jdbcType=VARCHAR},
+      "USER_ID" = #{userId,jdbcType=VARCHAR},
+      "BORROW_COMPANY" = #{borrowCompany,jdbcType=VARCHAR},
+      "BORROW_MONEY" = #{borrowMoney,jdbcType=VARCHAR},
+      "BORROW_RATE" = #{borrowRate,jdbcType=VARCHAR},
+      "TIME_LIMIT" = #{timeLimit,jdbcType=VARCHAR},
+      "BORROW_LIMIT" = #{borrowLimit,jdbcType=VARCHAR},
+      "BORROW_STATE" = #{borrowState,jdbcType=VARCHAR},
+      "BORROW_RECOMMEND" = #{borrowRecommend,jdbcType=VARCHAR},
+      "BORROW_TYPE" = #{borrowType,jdbcType=VARCHAR},
+      "BORROW_REMARK1" = #{borrowRemark1,jdbcType=VARCHAR},
+      "BORROW_REMARK2" = #{borrowRemark2,jdbcType=VARCHAR}
+    where "BORROW_ID" = #{borrowId,jdbcType=VARCHAR}
+  </update>
+</mapper>

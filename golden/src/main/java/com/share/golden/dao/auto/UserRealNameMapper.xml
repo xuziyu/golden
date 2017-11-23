@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.UserRealNameMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.UserRealName">
+    <id column="REAL_ID" jdbcType="VARCHAR" property="realId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="REAL_NAME" jdbcType="VARCHAR" property="realName" />
+    <result column="GENDER" jdbcType="VARCHAR" property="gender" />
+    <result column="IDENTITY_NUM" jdbcType="VARCHAR" property="identityNum" />
+    <result column="ATTESTATION_DATE" jdbcType="TIMESTAMP" property="attestationDate" />
+    <result column="CHECK" jdbcType="DECIMAL" property="check" />
+    <result column="BRITH_DATE" jdbcType="TIMESTAMP" property="brithDate" />
+    <result column="PLACE_OF_DOMICILE" jdbcType="VARCHAR" property="placeOfDomicile" />
+    <result column="THE _FRONT_OF_ID_CARD" jdbcType="VARCHAR" property="theFrontOfIdCard" />
+    <result column="THE _BACK_OF_ID_CARD" jdbcType="VARCHAR" property="theBackOfIdCard" />
+    <result column="AUDITOR" jdbcType="VARCHAR" property="auditor" />
+    <result column="AUDITOR_ID" jdbcType="VARCHAR" property="auditorId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "REAL_ID", "USER_ID", "REAL_NAME", "GENDER", "IDENTITY_NUM", "ATTESTATION_DATE", 
+    "CHECK", "BRITH_DATE", "PLACE_OF_DOMICILE", "THE _FRONT_OF_ID_CARD", "THE _BACK_OF_ID_CARD", 
+    "AUDITOR", "AUDITOR_ID"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.UserRealNameExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USER_REAL_NAME
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from USER_REAL_NAME
+    where "REAL_ID" = #{realId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from USER_REAL_NAME
+    where "REAL_ID" = #{realId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.UserRealNameExample">
+    delete from USER_REAL_NAME
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.UserRealName">
+    insert into USER_REAL_NAME ("REAL_ID", "USER_ID", "REAL_NAME", 
+      "GENDER", "IDENTITY_NUM", "ATTESTATION_DATE", 
+      "CHECK", "BRITH_DATE", "PLACE_OF_DOMICILE", 
+      "THE _FRONT_OF_ID_CARD", "THE _BACK_OF_ID_CARD", "AUDITOR", 
+      "AUDITOR_ID")
+    values (#{realId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=VARCHAR}, #{identityNum,jdbcType=VARCHAR}, #{attestationDate,jdbcType=TIMESTAMP}, 
+      #{check,jdbcType=DECIMAL}, #{brithDate,jdbcType=TIMESTAMP}, #{placeOfDomicile,jdbcType=VARCHAR}, 
+      #{theFrontOfIdCard,jdbcType=VARCHAR}, #{theBackOfIdCard,jdbcType=VARCHAR}, #{auditor,jdbcType=VARCHAR}, 
+      #{auditorId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.UserRealName">
+    insert into USER_REAL_NAME
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="realId != null">
+        "REAL_ID",
+      </if>
+      <if test="userId != null">
+        "USER_ID",
+      </if>
+      <if test="realName != null">
+        "REAL_NAME",
+      </if>
+      <if test="gender != null">
+        "GENDER",
+      </if>
+      <if test="identityNum != null">
+        "IDENTITY_NUM",
+      </if>
+      <if test="attestationDate != null">
+        "ATTESTATION_DATE",
+      </if>
+      <if test="check != null">
+        "CHECK",
+      </if>
+      <if test="brithDate != null">
+        "BRITH_DATE",
+      </if>
+      <if test="placeOfDomicile != null">
+        "PLACE_OF_DOMICILE",
+      </if>
+      <if test="theFrontOfIdCard != null">
+        "THE _FRONT_OF_ID_CARD",
+      </if>
+      <if test="theBackOfIdCard != null">
+        "THE _BACK_OF_ID_CARD",
+      </if>
+      <if test="auditor != null">
+        "AUDITOR",
+      </if>
+      <if test="auditorId != null">
+        "AUDITOR_ID",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="realId != null">
+        #{realId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNum != null">
+        #{identityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="attestationDate != null">
+        #{attestationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="check != null">
+        #{check,jdbcType=DECIMAL},
+      </if>
+      <if test="brithDate != null">
+        #{brithDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="placeOfDomicile != null">
+        #{placeOfDomicile,jdbcType=VARCHAR},
+      </if>
+      <if test="theFrontOfIdCard != null">
+        #{theFrontOfIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="theBackOfIdCard != null">
+        #{theBackOfIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null">
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorId != null">
+        #{auditorId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.UserRealNameExample" resultType="java.lang.Long">
+    select count(*) from USER_REAL_NAME
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update USER_REAL_NAME
+    <set>
+      <if test="record.realId != null">
+        "REAL_ID" = #{record.realId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null">
+        "REAL_NAME" = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        "GENDER" = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identityNum != null">
+        "IDENTITY_NUM" = #{record.identityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attestationDate != null">
+        "ATTESTATION_DATE" = #{record.attestationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.check != null">
+        "CHECK" = #{record.check,jdbcType=DECIMAL},
+      </if>
+      <if test="record.brithDate != null">
+        "BRITH_DATE" = #{record.brithDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.placeOfDomicile != null">
+        "PLACE_OF_DOMICILE" = #{record.placeOfDomicile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.theFrontOfIdCard != null">
+        "THE _FRONT_OF_ID_CARD" = #{record.theFrontOfIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.theBackOfIdCard != null">
+        "THE _BACK_OF_ID_CARD" = #{record.theBackOfIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditor != null">
+        "AUDITOR" = #{record.auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditorId != null">
+        "AUDITOR_ID" = #{record.auditorId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update USER_REAL_NAME
+    set "REAL_ID" = #{record.realId,jdbcType=VARCHAR},
+      "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      "REAL_NAME" = #{record.realName,jdbcType=VARCHAR},
+      "GENDER" = #{record.gender,jdbcType=VARCHAR},
+      "IDENTITY_NUM" = #{record.identityNum,jdbcType=VARCHAR},
+      "ATTESTATION_DATE" = #{record.attestationDate,jdbcType=TIMESTAMP},
+      "CHECK" = #{record.check,jdbcType=DECIMAL},
+      "BRITH_DATE" = #{record.brithDate,jdbcType=TIMESTAMP},
+      "PLACE_OF_DOMICILE" = #{record.placeOfDomicile,jdbcType=VARCHAR},
+      "THE _FRONT_OF_ID_CARD" = #{record.theFrontOfIdCard,jdbcType=VARCHAR},
+      "THE _BACK_OF_ID_CARD" = #{record.theBackOfIdCard,jdbcType=VARCHAR},
+      "AUDITOR" = #{record.auditor,jdbcType=VARCHAR},
+      "AUDITOR_ID" = #{record.auditorId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.UserRealName">
+    update USER_REAL_NAME
+    <set>
+      <if test="userId != null">
+        "USER_ID" = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        "REAL_NAME" = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        "GENDER" = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNum != null">
+        "IDENTITY_NUM" = #{identityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="attestationDate != null">
+        "ATTESTATION_DATE" = #{attestationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="check != null">
+        "CHECK" = #{check,jdbcType=DECIMAL},
+      </if>
+      <if test="brithDate != null">
+        "BRITH_DATE" = #{brithDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="placeOfDomicile != null">
+        "PLACE_OF_DOMICILE" = #{placeOfDomicile,jdbcType=VARCHAR},
+      </if>
+      <if test="theFrontOfIdCard != null">
+        "THE _FRONT_OF_ID_CARD" = #{theFrontOfIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="theBackOfIdCard != null">
+        "THE _BACK_OF_ID_CARD" = #{theBackOfIdCard,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null">
+        "AUDITOR" = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorId != null">
+        "AUDITOR_ID" = #{auditorId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "REAL_ID" = #{realId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.UserRealName">
+    update USER_REAL_NAME
+    set "USER_ID" = #{userId,jdbcType=VARCHAR},
+      "REAL_NAME" = #{realName,jdbcType=VARCHAR},
+      "GENDER" = #{gender,jdbcType=VARCHAR},
+      "IDENTITY_NUM" = #{identityNum,jdbcType=VARCHAR},
+      "ATTESTATION_DATE" = #{attestationDate,jdbcType=TIMESTAMP},
+      "CHECK" = #{check,jdbcType=DECIMAL},
+      "BRITH_DATE" = #{brithDate,jdbcType=TIMESTAMP},
+      "PLACE_OF_DOMICILE" = #{placeOfDomicile,jdbcType=VARCHAR},
+      "THE _FRONT_OF_ID_CARD" = #{theFrontOfIdCard,jdbcType=VARCHAR},
+      "THE _BACK_OF_ID_CARD" = #{theBackOfIdCard,jdbcType=VARCHAR},
+      "AUDITOR" = #{auditor,jdbcType=VARCHAR},
+      "AUDITOR_ID" = #{auditorId,jdbcType=VARCHAR}
+    where "REAL_ID" = #{realId,jdbcType=VARCHAR}
+  </update>
+</mapper>

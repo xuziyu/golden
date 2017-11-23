@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.SysFeedbackMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.SysFeedback">
+    <id column="FEEDBACK_ID" jdbcType="VARCHAR" property="feedbackId" />
+    <result column="FEEDBACK_NAME" jdbcType="VARCHAR" property="feedbackName" />
+    <result column="FEEDBACK_CONENT" jdbcType="VARCHAR" property="feedbackConent" />
+    <result column="FEEDBACK_TIME" jdbcType="TIMESTAMP" property="feedbackTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "FEEDBACK_ID", "FEEDBACK_NAME", "FEEDBACK_CONENT", "FEEDBACK_TIME"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.SysFeedbackExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_FEEDBACK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_FEEDBACK
+    where "FEEDBACK_ID" = #{feedbackId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_FEEDBACK
+    where "FEEDBACK_ID" = #{feedbackId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.SysFeedbackExample">
+    delete from SYS_FEEDBACK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.SysFeedback">
+    insert into SYS_FEEDBACK ("FEEDBACK_ID", "FEEDBACK_NAME", "FEEDBACK_CONENT", 
+      "FEEDBACK_TIME")
+    values (#{feedbackId,jdbcType=VARCHAR}, #{feedbackName,jdbcType=VARCHAR}, #{feedbackConent,jdbcType=VARCHAR}, 
+      #{feedbackTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.SysFeedback">
+    insert into SYS_FEEDBACK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="feedbackId != null">
+        "FEEDBACK_ID",
+      </if>
+      <if test="feedbackName != null">
+        "FEEDBACK_NAME",
+      </if>
+      <if test="feedbackConent != null">
+        "FEEDBACK_CONENT",
+      </if>
+      <if test="feedbackTime != null">
+        "FEEDBACK_TIME",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="feedbackId != null">
+        #{feedbackId,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackName != null">
+        #{feedbackName,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackConent != null">
+        #{feedbackConent,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackTime != null">
+        #{feedbackTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.SysFeedbackExample" resultType="java.lang.Long">
+    select count(*) from SYS_FEEDBACK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_FEEDBACK
+    <set>
+      <if test="record.feedbackId != null">
+        "FEEDBACK_ID" = #{record.feedbackId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackName != null">
+        "FEEDBACK_NAME" = #{record.feedbackName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackConent != null">
+        "FEEDBACK_CONENT" = #{record.feedbackConent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackTime != null">
+        "FEEDBACK_TIME" = #{record.feedbackTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_FEEDBACK
+    set "FEEDBACK_ID" = #{record.feedbackId,jdbcType=VARCHAR},
+      "FEEDBACK_NAME" = #{record.feedbackName,jdbcType=VARCHAR},
+      "FEEDBACK_CONENT" = #{record.feedbackConent,jdbcType=VARCHAR},
+      "FEEDBACK_TIME" = #{record.feedbackTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.SysFeedback">
+    update SYS_FEEDBACK
+    <set>
+      <if test="feedbackName != null">
+        "FEEDBACK_NAME" = #{feedbackName,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackConent != null">
+        "FEEDBACK_CONENT" = #{feedbackConent,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackTime != null">
+        "FEEDBACK_TIME" = #{feedbackTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where "FEEDBACK_ID" = #{feedbackId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.SysFeedback">
+    update SYS_FEEDBACK
+    set "FEEDBACK_NAME" = #{feedbackName,jdbcType=VARCHAR},
+      "FEEDBACK_CONENT" = #{feedbackConent,jdbcType=VARCHAR},
+      "FEEDBACK_TIME" = #{feedbackTime,jdbcType=TIMESTAMP}
+    where "FEEDBACK_ID" = #{feedbackId,jdbcType=VARCHAR}
+  </update>
+</mapper>

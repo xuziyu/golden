@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.UserApplyForLimitMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.UserApplyForLimit">
+    <id column="APPLY_CODE" jdbcType="VARCHAR" property="applyCode" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="ORIGINAL_CREDIT" jdbcType="DECIMAL" property="originalCredit" />
+    <result column="HOUSE_OF_PROPERTY" jdbcType="VARCHAR" property="houseOfProperty" />
+    <result column="APPLY_LIMIT" jdbcType="DECIMAL" property="applyLimit" />
+    <result column="APPLY_DATE" jdbcType="TIMESTAMP" property="applyDate" />
+    <result column="APPLY_STATE" jdbcType="VARCHAR" property="applyState" />
+    <result column="CHECK_ID" jdbcType="VARCHAR" property="checkId" />
+    <result column="VAILD" jdbcType="CHAR" property="vaild" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "APPLY_CODE", "USER_ID", "ORIGINAL_CREDIT", "HOUSE_OF_PROPERTY", "APPLY_LIMIT", "APPLY_DATE", 
+    "APPLY_STATE", "CHECK_ID", "VAILD"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.UserApplyForLimitExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USER_APPLY_FOR_LIMIT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from USER_APPLY_FOR_LIMIT
+    where "APPLY_CODE" = #{applyCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from USER_APPLY_FOR_LIMIT
+    where "APPLY_CODE" = #{applyCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.UserApplyForLimitExample">
+    delete from USER_APPLY_FOR_LIMIT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.UserApplyForLimit">
+    insert into USER_APPLY_FOR_LIMIT ("APPLY_CODE", "USER_ID", "ORIGINAL_CREDIT", 
+      "HOUSE_OF_PROPERTY", "APPLY_LIMIT", "APPLY_DATE", 
+      "APPLY_STATE", "CHECK_ID", "VAILD"
+      )
+    values (#{applyCode,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{originalCredit,jdbcType=DECIMAL}, 
+      #{houseOfProperty,jdbcType=VARCHAR}, #{applyLimit,jdbcType=DECIMAL}, #{applyDate,jdbcType=TIMESTAMP}, 
+      #{applyState,jdbcType=VARCHAR}, #{checkId,jdbcType=VARCHAR}, #{vaild,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.UserApplyForLimit">
+    insert into USER_APPLY_FOR_LIMIT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="applyCode != null">
+        "APPLY_CODE",
+      </if>
+      <if test="userId != null">
+        "USER_ID",
+      </if>
+      <if test="originalCredit != null">
+        "ORIGINAL_CREDIT",
+      </if>
+      <if test="houseOfProperty != null">
+        "HOUSE_OF_PROPERTY",
+      </if>
+      <if test="applyLimit != null">
+        "APPLY_LIMIT",
+      </if>
+      <if test="applyDate != null">
+        "APPLY_DATE",
+      </if>
+      <if test="applyState != null">
+        "APPLY_STATE",
+      </if>
+      <if test="checkId != null">
+        "CHECK_ID",
+      </if>
+      <if test="vaild != null">
+        "VAILD",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="applyCode != null">
+        #{applyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalCredit != null">
+        #{originalCredit,jdbcType=DECIMAL},
+      </if>
+      <if test="houseOfProperty != null">
+        #{houseOfProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="applyLimit != null">
+        #{applyLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="applyDate != null">
+        #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyState != null">
+        #{applyState,jdbcType=VARCHAR},
+      </if>
+      <if test="checkId != null">
+        #{checkId,jdbcType=VARCHAR},
+      </if>
+      <if test="vaild != null">
+        #{vaild,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.UserApplyForLimitExample" resultType="java.lang.Long">
+    select count(*) from USER_APPLY_FOR_LIMIT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update USER_APPLY_FOR_LIMIT
+    <set>
+      <if test="record.applyCode != null">
+        "APPLY_CODE" = #{record.applyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.originalCredit != null">
+        "ORIGINAL_CREDIT" = #{record.originalCredit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.houseOfProperty != null">
+        "HOUSE_OF_PROPERTY" = #{record.houseOfProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyLimit != null">
+        "APPLY_LIMIT" = #{record.applyLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.applyDate != null">
+        "APPLY_DATE" = #{record.applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.applyState != null">
+        "APPLY_STATE" = #{record.applyState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkId != null">
+        "CHECK_ID" = #{record.checkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vaild != null">
+        "VAILD" = #{record.vaild,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update USER_APPLY_FOR_LIMIT
+    set "APPLY_CODE" = #{record.applyCode,jdbcType=VARCHAR},
+      "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      "ORIGINAL_CREDIT" = #{record.originalCredit,jdbcType=DECIMAL},
+      "HOUSE_OF_PROPERTY" = #{record.houseOfProperty,jdbcType=VARCHAR},
+      "APPLY_LIMIT" = #{record.applyLimit,jdbcType=DECIMAL},
+      "APPLY_DATE" = #{record.applyDate,jdbcType=TIMESTAMP},
+      "APPLY_STATE" = #{record.applyState,jdbcType=VARCHAR},
+      "CHECK_ID" = #{record.checkId,jdbcType=VARCHAR},
+      "VAILD" = #{record.vaild,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.UserApplyForLimit">
+    update USER_APPLY_FOR_LIMIT
+    <set>
+      <if test="userId != null">
+        "USER_ID" = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="originalCredit != null">
+        "ORIGINAL_CREDIT" = #{originalCredit,jdbcType=DECIMAL},
+      </if>
+      <if test="houseOfProperty != null">
+        "HOUSE_OF_PROPERTY" = #{houseOfProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="applyLimit != null">
+        "APPLY_LIMIT" = #{applyLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="applyDate != null">
+        "APPLY_DATE" = #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyState != null">
+        "APPLY_STATE" = #{applyState,jdbcType=VARCHAR},
+      </if>
+      <if test="checkId != null">
+        "CHECK_ID" = #{checkId,jdbcType=VARCHAR},
+      </if>
+      <if test="vaild != null">
+        "VAILD" = #{vaild,jdbcType=CHAR},
+      </if>
+    </set>
+    where "APPLY_CODE" = #{applyCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.UserApplyForLimit">
+    update USER_APPLY_FOR_LIMIT
+    set "USER_ID" = #{userId,jdbcType=VARCHAR},
+      "ORIGINAL_CREDIT" = #{originalCredit,jdbcType=DECIMAL},
+      "HOUSE_OF_PROPERTY" = #{houseOfProperty,jdbcType=VARCHAR},
+      "APPLY_LIMIT" = #{applyLimit,jdbcType=DECIMAL},
+      "APPLY_DATE" = #{applyDate,jdbcType=TIMESTAMP},
+      "APPLY_STATE" = #{applyState,jdbcType=VARCHAR},
+      "CHECK_ID" = #{checkId,jdbcType=VARCHAR},
+      "VAILD" = #{vaild,jdbcType=CHAR}
+    where "APPLY_CODE" = #{applyCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

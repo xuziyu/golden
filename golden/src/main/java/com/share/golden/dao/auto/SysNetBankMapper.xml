@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.SysNetBankMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.SysNetBank">
+    <id column="TRADE_ID" jdbcType="VARCHAR" property="tradeId" />
+    <result column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="TRADE_TYPE" jdbcType="VARCHAR" property="tradeType" />
+    <result column="TRADE_MONEY" jdbcType="DECIMAL" property="tradeMoney" />
+    <result column="CARD_PASSWORD" jdbcType="VARCHAR" property="cardPassword" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "TRADE_ID", "CARD_ID", "TRADE_TYPE", "TRADE_MONEY", "CARD_PASSWORD"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.SysNetBankExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_NET_BANK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_NET_BANK
+    where "TRADE_ID" = #{tradeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_NET_BANK
+    where "TRADE_ID" = #{tradeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.SysNetBankExample">
+    delete from SYS_NET_BANK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.SysNetBank">
+    insert into SYS_NET_BANK ("TRADE_ID", "CARD_ID", "TRADE_TYPE", 
+      "TRADE_MONEY", "CARD_PASSWORD")
+    values (#{tradeId,jdbcType=VARCHAR}, #{cardId,jdbcType=VARCHAR}, #{tradeType,jdbcType=VARCHAR}, 
+      #{tradeMoney,jdbcType=DECIMAL}, #{cardPassword,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.SysNetBank">
+    insert into SYS_NET_BANK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tradeId != null">
+        "TRADE_ID",
+      </if>
+      <if test="cardId != null">
+        "CARD_ID",
+      </if>
+      <if test="tradeType != null">
+        "TRADE_TYPE",
+      </if>
+      <if test="tradeMoney != null">
+        "TRADE_MONEY",
+      </if>
+      <if test="cardPassword != null">
+        "CARD_PASSWORD",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tradeId != null">
+        #{tradeId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null">
+        #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeMoney != null">
+        #{tradeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cardPassword != null">
+        #{cardPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.SysNetBankExample" resultType="java.lang.Long">
+    select count(*) from SYS_NET_BANK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_NET_BANK
+    <set>
+      <if test="record.tradeId != null">
+        "TRADE_ID" = #{record.tradeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardId != null">
+        "CARD_ID" = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeType != null">
+        "TRADE_TYPE" = #{record.tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeMoney != null">
+        "TRADE_MONEY" = #{record.tradeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.cardPassword != null">
+        "CARD_PASSWORD" = #{record.cardPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_NET_BANK
+    set "TRADE_ID" = #{record.tradeId,jdbcType=VARCHAR},
+      "CARD_ID" = #{record.cardId,jdbcType=VARCHAR},
+      "TRADE_TYPE" = #{record.tradeType,jdbcType=VARCHAR},
+      "TRADE_MONEY" = #{record.tradeMoney,jdbcType=DECIMAL},
+      "CARD_PASSWORD" = #{record.cardPassword,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.SysNetBank">
+    update SYS_NET_BANK
+    <set>
+      <if test="cardId != null">
+        "CARD_ID" = #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null">
+        "TRADE_TYPE" = #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeMoney != null">
+        "TRADE_MONEY" = #{tradeMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="cardPassword != null">
+        "CARD_PASSWORD" = #{cardPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "TRADE_ID" = #{tradeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.SysNetBank">
+    update SYS_NET_BANK
+    set "CARD_ID" = #{cardId,jdbcType=VARCHAR},
+      "TRADE_TYPE" = #{tradeType,jdbcType=VARCHAR},
+      "TRADE_MONEY" = #{tradeMoney,jdbcType=DECIMAL},
+      "CARD_PASSWORD" = #{cardPassword,jdbcType=VARCHAR}
+    where "TRADE_ID" = #{tradeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

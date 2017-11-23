@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.SysPoundageMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.SysPoundage">
+    <id column="POUNDAGE_ID" jdbcType="VARCHAR" property="poundageId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="POUNDAGE_SERVICE_MONEY" jdbcType="DECIMAL" property="poundageServiceMoney" />
+    <result column="POUNDAGE_TYPE" jdbcType="VARCHAR" property="poundageType" />
+    <result column="TIME" jdbcType="TIMESTAMP" property="time" />
+    <result column="LOCALACCOUNT" jdbcType="VARCHAR" property="localaccount" />
+    <result column="BOOKACCOUNT" jdbcType="VARCHAR" property="bookaccount" />
+    <result column="PAYTYPE" jdbcType="VARCHAR" property="paytype" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "POUNDAGE_ID", "USER_ID", "POUNDAGE_SERVICE_MONEY", "POUNDAGE_TYPE", "TIME", "LOCALACCOUNT", 
+    "BOOKACCOUNT", "PAYTYPE"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.SysPoundageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_POUNDAGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_POUNDAGE
+    where "POUNDAGE_ID" = #{poundageId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_POUNDAGE
+    where "POUNDAGE_ID" = #{poundageId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.SysPoundageExample">
+    delete from SYS_POUNDAGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.SysPoundage">
+    insert into SYS_POUNDAGE ("POUNDAGE_ID", "USER_ID", "POUNDAGE_SERVICE_MONEY", 
+      "POUNDAGE_TYPE", "TIME", "LOCALACCOUNT", 
+      "BOOKACCOUNT", "PAYTYPE")
+    values (#{poundageId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{poundageServiceMoney,jdbcType=DECIMAL}, 
+      #{poundageType,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{localaccount,jdbcType=VARCHAR}, 
+      #{bookaccount,jdbcType=VARCHAR}, #{paytype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.SysPoundage">
+    insert into SYS_POUNDAGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="poundageId != null">
+        "POUNDAGE_ID",
+      </if>
+      <if test="userId != null">
+        "USER_ID",
+      </if>
+      <if test="poundageServiceMoney != null">
+        "POUNDAGE_SERVICE_MONEY",
+      </if>
+      <if test="poundageType != null">
+        "POUNDAGE_TYPE",
+      </if>
+      <if test="time != null">
+        "TIME",
+      </if>
+      <if test="localaccount != null">
+        "LOCALACCOUNT",
+      </if>
+      <if test="bookaccount != null">
+        "BOOKACCOUNT",
+      </if>
+      <if test="paytype != null">
+        "PAYTYPE",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="poundageId != null">
+        #{poundageId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="poundageServiceMoney != null">
+        #{poundageServiceMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="poundageType != null">
+        #{poundageType,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="localaccount != null">
+        #{localaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bookaccount != null">
+        #{bookaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="paytype != null">
+        #{paytype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.SysPoundageExample" resultType="java.lang.Long">
+    select count(*) from SYS_POUNDAGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_POUNDAGE
+    <set>
+      <if test="record.poundageId != null">
+        "POUNDAGE_ID" = #{record.poundageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.poundageServiceMoney != null">
+        "POUNDAGE_SERVICE_MONEY" = #{record.poundageServiceMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.poundageType != null">
+        "POUNDAGE_TYPE" = #{record.poundageType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null">
+        "TIME" = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.localaccount != null">
+        "LOCALACCOUNT" = #{record.localaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bookaccount != null">
+        "BOOKACCOUNT" = #{record.bookaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paytype != null">
+        "PAYTYPE" = #{record.paytype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_POUNDAGE
+    set "POUNDAGE_ID" = #{record.poundageId,jdbcType=VARCHAR},
+      "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      "POUNDAGE_SERVICE_MONEY" = #{record.poundageServiceMoney,jdbcType=DECIMAL},
+      "POUNDAGE_TYPE" = #{record.poundageType,jdbcType=VARCHAR},
+      "TIME" = #{record.time,jdbcType=TIMESTAMP},
+      "LOCALACCOUNT" = #{record.localaccount,jdbcType=VARCHAR},
+      "BOOKACCOUNT" = #{record.bookaccount,jdbcType=VARCHAR},
+      "PAYTYPE" = #{record.paytype,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.SysPoundage">
+    update SYS_POUNDAGE
+    <set>
+      <if test="userId != null">
+        "USER_ID" = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="poundageServiceMoney != null">
+        "POUNDAGE_SERVICE_MONEY" = #{poundageServiceMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="poundageType != null">
+        "POUNDAGE_TYPE" = #{poundageType,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        "TIME" = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="localaccount != null">
+        "LOCALACCOUNT" = #{localaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bookaccount != null">
+        "BOOKACCOUNT" = #{bookaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="paytype != null">
+        "PAYTYPE" = #{paytype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "POUNDAGE_ID" = #{poundageId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.SysPoundage">
+    update SYS_POUNDAGE
+    set "USER_ID" = #{userId,jdbcType=VARCHAR},
+      "POUNDAGE_SERVICE_MONEY" = #{poundageServiceMoney,jdbcType=DECIMAL},
+      "POUNDAGE_TYPE" = #{poundageType,jdbcType=VARCHAR},
+      "TIME" = #{time,jdbcType=TIMESTAMP},
+      "LOCALACCOUNT" = #{localaccount,jdbcType=VARCHAR},
+      "BOOKACCOUNT" = #{bookaccount,jdbcType=VARCHAR},
+      "PAYTYPE" = #{paytype,jdbcType=VARCHAR}
+    where "POUNDAGE_ID" = #{poundageId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.UserBankCardMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.UserBankCard">
+    <id column="CARD_ID" jdbcType="VARCHAR" property="cardId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="TRADE_CODE" jdbcType="VARCHAR" property="tradeCode" />
+    <result column="IDENTITY_NUMBER" jdbcType="VARCHAR" property="identityNumber" />
+    <result column="BANK_NAME" jdbcType="VARCHAR" property="bankName" />
+    <result column="SUBMIT_TIME" jdbcType="TIMESTAMP" property="submitTime" />
+    <result column="STATE" jdbcType="VARCHAR" property="state" />
+    <result column="BLANCE" jdbcType="DECIMAL" property="blance" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "CARD_ID", "USER_ID", "TRADE_CODE", "IDENTITY_NUMBER", "BANK_NAME", "SUBMIT_TIME", 
+    "STATE", "BLANCE"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.UserBankCardExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USER_BANK_CARD
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from USER_BANK_CARD
+    where "CARD_ID" = #{cardId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from USER_BANK_CARD
+    where "CARD_ID" = #{cardId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.UserBankCardExample">
+    delete from USER_BANK_CARD
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.UserBankCard">
+    insert into USER_BANK_CARD ("CARD_ID", "USER_ID", "TRADE_CODE", 
+      "IDENTITY_NUMBER", "BANK_NAME", "SUBMIT_TIME", 
+      "STATE", "BLANCE")
+    values (#{cardId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{tradeCode,jdbcType=VARCHAR}, 
+      #{identityNumber,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{submitTime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=VARCHAR}, #{blance,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.UserBankCard">
+    insert into USER_BANK_CARD
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        "CARD_ID",
+      </if>
+      <if test="userId != null">
+        "USER_ID",
+      </if>
+      <if test="tradeCode != null">
+        "TRADE_CODE",
+      </if>
+      <if test="identityNumber != null">
+        "IDENTITY_NUMBER",
+      </if>
+      <if test="bankName != null">
+        "BANK_NAME",
+      </if>
+      <if test="submitTime != null">
+        "SUBMIT_TIME",
+      </if>
+      <if test="state != null">
+        "STATE",
+      </if>
+      <if test="blance != null">
+        "BLANCE",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cardId != null">
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeCode != null">
+        #{tradeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNumber != null">
+        #{identityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null">
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="blance != null">
+        #{blance,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.UserBankCardExample" resultType="java.lang.Long">
+    select count(*) from USER_BANK_CARD
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update USER_BANK_CARD
+    <set>
+      <if test="record.cardId != null">
+        "CARD_ID" = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeCode != null">
+        "TRADE_CODE" = #{record.tradeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identityNumber != null">
+        "IDENTITY_NUMBER" = #{record.identityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankName != null">
+        "BANK_NAME" = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.submitTime != null">
+        "SUBMIT_TIME" = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null">
+        "STATE" = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blance != null">
+        "BLANCE" = #{record.blance,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update USER_BANK_CARD
+    set "CARD_ID" = #{record.cardId,jdbcType=VARCHAR},
+      "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      "TRADE_CODE" = #{record.tradeCode,jdbcType=VARCHAR},
+      "IDENTITY_NUMBER" = #{record.identityNumber,jdbcType=VARCHAR},
+      "BANK_NAME" = #{record.bankName,jdbcType=VARCHAR},
+      "SUBMIT_TIME" = #{record.submitTime,jdbcType=TIMESTAMP},
+      "STATE" = #{record.state,jdbcType=VARCHAR},
+      "BLANCE" = #{record.blance,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.UserBankCard">
+    update USER_BANK_CARD
+    <set>
+      <if test="userId != null">
+        "USER_ID" = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeCode != null">
+        "TRADE_CODE" = #{tradeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNumber != null">
+        "IDENTITY_NUMBER" = #{identityNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        "BANK_NAME" = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null">
+        "SUBMIT_TIME" = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        "STATE" = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="blance != null">
+        "BLANCE" = #{blance,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where "CARD_ID" = #{cardId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.UserBankCard">
+    update USER_BANK_CARD
+    set "USER_ID" = #{userId,jdbcType=VARCHAR},
+      "TRADE_CODE" = #{tradeCode,jdbcType=VARCHAR},
+      "IDENTITY_NUMBER" = #{identityNumber,jdbcType=VARCHAR},
+      "BANK_NAME" = #{bankName,jdbcType=VARCHAR},
+      "SUBMIT_TIME" = #{submitTime,jdbcType=TIMESTAMP},
+      "STATE" = #{state,jdbcType=VARCHAR},
+      "BLANCE" = #{blance,jdbcType=DECIMAL}
+    where "CARD_ID" = #{cardId,jdbcType=VARCHAR}
+  </update>
+</mapper>

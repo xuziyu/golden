@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.SysRechargeMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.SysRecharge">
+    <id column="RECHARGE_ID" jdbcType="VARCHAR" property="rechargeId" />
+    <result column="RECHARGE_CODE" jdbcType="VARCHAR" property="rechargeCode" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="RECHARGE_TYPE" jdbcType="VARCHAR" property="rechargeType" />
+    <result column="RECHARGE_MONEY" jdbcType="VARCHAR" property="rechargeMoney" />
+    <result column="RECHARGE_TIME" jdbcType="TIMESTAMP" property="rechargeTime" />
+    <result column="RECHARGE_STATU" jdbcType="VARCHAR" property="rechargeStatu" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "RECHARGE_ID", "RECHARGE_CODE", "USER_ID", "RECHARGE_TYPE", "RECHARGE_MONEY", "RECHARGE_TIME", 
+    "RECHARGE_STATU"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.SysRechargeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_RECHARGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_RECHARGE
+    where "RECHARGE_ID" = #{rechargeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_RECHARGE
+    where "RECHARGE_ID" = #{rechargeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.SysRechargeExample">
+    delete from SYS_RECHARGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.SysRecharge">
+    insert into SYS_RECHARGE ("RECHARGE_ID", "RECHARGE_CODE", "USER_ID", 
+      "RECHARGE_TYPE", "RECHARGE_MONEY", "RECHARGE_TIME", 
+      "RECHARGE_STATU")
+    values (#{rechargeId,jdbcType=VARCHAR}, #{rechargeCode,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{rechargeType,jdbcType=VARCHAR}, #{rechargeMoney,jdbcType=VARCHAR}, #{rechargeTime,jdbcType=TIMESTAMP}, 
+      #{rechargeStatu,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.SysRecharge">
+    insert into SYS_RECHARGE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rechargeId != null">
+        "RECHARGE_ID",
+      </if>
+      <if test="rechargeCode != null">
+        "RECHARGE_CODE",
+      </if>
+      <if test="userId != null">
+        "USER_ID",
+      </if>
+      <if test="rechargeType != null">
+        "RECHARGE_TYPE",
+      </if>
+      <if test="rechargeMoney != null">
+        "RECHARGE_MONEY",
+      </if>
+      <if test="rechargeTime != null">
+        "RECHARGE_TIME",
+      </if>
+      <if test="rechargeStatu != null">
+        "RECHARGE_STATU",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rechargeId != null">
+        #{rechargeId,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeCode != null">
+        #{rechargeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeType != null">
+        #{rechargeType,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeMoney != null">
+        #{rechargeMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeTime != null">
+        #{rechargeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rechargeStatu != null">
+        #{rechargeStatu,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.SysRechargeExample" resultType="java.lang.Long">
+    select count(*) from SYS_RECHARGE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_RECHARGE
+    <set>
+      <if test="record.rechargeId != null">
+        "RECHARGE_ID" = #{record.rechargeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rechargeCode != null">
+        "RECHARGE_CODE" = #{record.rechargeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rechargeType != null">
+        "RECHARGE_TYPE" = #{record.rechargeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rechargeMoney != null">
+        "RECHARGE_MONEY" = #{record.rechargeMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rechargeTime != null">
+        "RECHARGE_TIME" = #{record.rechargeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.rechargeStatu != null">
+        "RECHARGE_STATU" = #{record.rechargeStatu,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_RECHARGE
+    set "RECHARGE_ID" = #{record.rechargeId,jdbcType=VARCHAR},
+      "RECHARGE_CODE" = #{record.rechargeCode,jdbcType=VARCHAR},
+      "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      "RECHARGE_TYPE" = #{record.rechargeType,jdbcType=VARCHAR},
+      "RECHARGE_MONEY" = #{record.rechargeMoney,jdbcType=VARCHAR},
+      "RECHARGE_TIME" = #{record.rechargeTime,jdbcType=TIMESTAMP},
+      "RECHARGE_STATU" = #{record.rechargeStatu,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.SysRecharge">
+    update SYS_RECHARGE
+    <set>
+      <if test="rechargeCode != null">
+        "RECHARGE_CODE" = #{rechargeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        "USER_ID" = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeType != null">
+        "RECHARGE_TYPE" = #{rechargeType,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeMoney != null">
+        "RECHARGE_MONEY" = #{rechargeMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeTime != null">
+        "RECHARGE_TIME" = #{rechargeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rechargeStatu != null">
+        "RECHARGE_STATU" = #{rechargeStatu,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "RECHARGE_ID" = #{rechargeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.SysRecharge">
+    update SYS_RECHARGE
+    set "RECHARGE_CODE" = #{rechargeCode,jdbcType=VARCHAR},
+      "USER_ID" = #{userId,jdbcType=VARCHAR},
+      "RECHARGE_TYPE" = #{rechargeType,jdbcType=VARCHAR},
+      "RECHARGE_MONEY" = #{rechargeMoney,jdbcType=VARCHAR},
+      "RECHARGE_TIME" = #{rechargeTime,jdbcType=TIMESTAMP},
+      "RECHARGE_STATU" = #{rechargeStatu,jdbcType=VARCHAR}
+    where "RECHARGE_ID" = #{rechargeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

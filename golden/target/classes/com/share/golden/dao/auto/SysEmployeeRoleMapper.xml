@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.SysEmployeeRoleMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.SysEmployeeRole">
+    <id column="EMPLOYEE_ROLE_ID" jdbcType="VARCHAR" property="employeeRoleId" />
+    <result column="EMPLOYEE_ID" jdbcType="VARCHAR" property="employeeId" />
+    <result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "EMPLOYEE_ROLE_ID", "EMPLOYEE_ID", "ROLE_ID"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.SysEmployeeRoleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_EMPLOYEE_ROLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_EMPLOYEE_ROLE
+    where "EMPLOYEE_ROLE_ID" = #{employeeRoleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_EMPLOYEE_ROLE
+    where "EMPLOYEE_ROLE_ID" = #{employeeRoleId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.SysEmployeeRoleExample">
+    delete from SYS_EMPLOYEE_ROLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.SysEmployeeRole">
+    insert into SYS_EMPLOYEE_ROLE ("EMPLOYEE_ROLE_ID", "EMPLOYEE_ID", "ROLE_ID"
+      )
+    values (#{employeeRoleId,jdbcType=VARCHAR}, #{employeeId,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.SysEmployeeRole">
+    insert into SYS_EMPLOYEE_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="employeeRoleId != null">
+        "EMPLOYEE_ROLE_ID",
+      </if>
+      <if test="employeeId != null">
+        "EMPLOYEE_ID",
+      </if>
+      <if test="roleId != null">
+        "ROLE_ID",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="employeeRoleId != null">
+        #{employeeRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeId != null">
+        #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.SysEmployeeRoleExample" resultType="java.lang.Long">
+    select count(*) from SYS_EMPLOYEE_ROLE
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_EMPLOYEE_ROLE
+    <set>
+      <if test="record.employeeRoleId != null">
+        "EMPLOYEE_ROLE_ID" = #{record.employeeRoleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeId != null">
+        "EMPLOYEE_ID" = #{record.employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.roleId != null">
+        "ROLE_ID" = #{record.roleId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_EMPLOYEE_ROLE
+    set "EMPLOYEE_ROLE_ID" = #{record.employeeRoleId,jdbcType=VARCHAR},
+      "EMPLOYEE_ID" = #{record.employeeId,jdbcType=VARCHAR},
+      "ROLE_ID" = #{record.roleId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.SysEmployeeRole">
+    update SYS_EMPLOYEE_ROLE
+    <set>
+      <if test="employeeId != null">
+        "EMPLOYEE_ID" = #{employeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        "ROLE_ID" = #{roleId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "EMPLOYEE_ROLE_ID" = #{employeeRoleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.SysEmployeeRole">
+    update SYS_EMPLOYEE_ROLE
+    set "EMPLOYEE_ID" = #{employeeId,jdbcType=VARCHAR},
+      "ROLE_ID" = #{roleId,jdbcType=VARCHAR}
+    where "EMPLOYEE_ROLE_ID" = #{employeeRoleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

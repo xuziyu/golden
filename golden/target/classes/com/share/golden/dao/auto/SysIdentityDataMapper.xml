@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.SysIdentityDataMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.SysIdentityData">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="IDENTITY_NUM" jdbcType="VARCHAR" property="identityNum" />
+    <result column="TRUE_NAME" jdbcType="VARCHAR" property="trueName" />
+    <result column="PLACE_OF_DOMICILE" jdbcType="VARCHAR" property="placeOfDomicile" />
+    <result column="BRITH_DATE" jdbcType="TIMESTAMP" property="brithDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "ID", "IDENTITY_NUM", "TRUE_NAME", "PLACE_OF_DOMICILE", "BRITH_DATE"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.SysIdentityDataExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_IDENTITY_DATA
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_IDENTITY_DATA
+    where "ID" = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_IDENTITY_DATA
+    where "ID" = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.SysIdentityDataExample">
+    delete from SYS_IDENTITY_DATA
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.SysIdentityData">
+    insert into SYS_IDENTITY_DATA ("ID", "IDENTITY_NUM", "TRUE_NAME", 
+      "PLACE_OF_DOMICILE", "BRITH_DATE")
+    values (#{id,jdbcType=VARCHAR}, #{identityNum,jdbcType=VARCHAR}, #{trueName,jdbcType=VARCHAR}, 
+      #{placeOfDomicile,jdbcType=VARCHAR}, #{brithDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.SysIdentityData">
+    insert into SYS_IDENTITY_DATA
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        "ID",
+      </if>
+      <if test="identityNum != null">
+        "IDENTITY_NUM",
+      </if>
+      <if test="trueName != null">
+        "TRUE_NAME",
+      </if>
+      <if test="placeOfDomicile != null">
+        "PLACE_OF_DOMICILE",
+      </if>
+      <if test="brithDate != null">
+        "BRITH_DATE",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="identityNum != null">
+        #{identityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="trueName != null">
+        #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="placeOfDomicile != null">
+        #{placeOfDomicile,jdbcType=VARCHAR},
+      </if>
+      <if test="brithDate != null">
+        #{brithDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.SysIdentityDataExample" resultType="java.lang.Long">
+    select count(*) from SYS_IDENTITY_DATA
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_IDENTITY_DATA
+    <set>
+      <if test="record.id != null">
+        "ID" = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identityNum != null">
+        "IDENTITY_NUM" = #{record.identityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trueName != null">
+        "TRUE_NAME" = #{record.trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.placeOfDomicile != null">
+        "PLACE_OF_DOMICILE" = #{record.placeOfDomicile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brithDate != null">
+        "BRITH_DATE" = #{record.brithDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_IDENTITY_DATA
+    set "ID" = #{record.id,jdbcType=VARCHAR},
+      "IDENTITY_NUM" = #{record.identityNum,jdbcType=VARCHAR},
+      "TRUE_NAME" = #{record.trueName,jdbcType=VARCHAR},
+      "PLACE_OF_DOMICILE" = #{record.placeOfDomicile,jdbcType=VARCHAR},
+      "BRITH_DATE" = #{record.brithDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.SysIdentityData">
+    update SYS_IDENTITY_DATA
+    <set>
+      <if test="identityNum != null">
+        "IDENTITY_NUM" = #{identityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="trueName != null">
+        "TRUE_NAME" = #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="placeOfDomicile != null">
+        "PLACE_OF_DOMICILE" = #{placeOfDomicile,jdbcType=VARCHAR},
+      </if>
+      <if test="brithDate != null">
+        "BRITH_DATE" = #{brithDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where "ID" = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.SysIdentityData">
+    update SYS_IDENTITY_DATA
+    set "IDENTITY_NUM" = #{identityNum,jdbcType=VARCHAR},
+      "TRUE_NAME" = #{trueName,jdbcType=VARCHAR},
+      "PLACE_OF_DOMICILE" = #{placeOfDomicile,jdbcType=VARCHAR},
+      "BRITH_DATE" = #{brithDate,jdbcType=TIMESTAMP}
+    where "ID" = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

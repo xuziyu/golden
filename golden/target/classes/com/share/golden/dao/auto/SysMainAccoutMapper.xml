@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.SysMainAccoutMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.SysMainAccout">
+    <id column="DEAL_ID" jdbcType="VARCHAR" property="dealId" />
+    <result column="BANKCARD_ID" jdbcType="VARCHAR" property="bankcardId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="BALANCE" jdbcType="DECIMAL" property="balance" />
+    <result column="DEAL_TYPE" jdbcType="VARCHAR" property="dealType" />
+    <result column="DEAL_DATE" jdbcType="TIMESTAMP" property="dealDate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "DEAL_ID", "BANKCARD_ID", "USER_ID", "BALANCE", "DEAL_TYPE", "DEAL_DATE"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.SysMainAccoutExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_MAIN_ACCOUT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_MAIN_ACCOUT
+    where "DEAL_ID" = #{dealId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from SYS_MAIN_ACCOUT
+    where "DEAL_ID" = #{dealId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.SysMainAccoutExample">
+    delete from SYS_MAIN_ACCOUT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.SysMainAccout">
+    insert into SYS_MAIN_ACCOUT ("DEAL_ID", "BANKCARD_ID", "USER_ID", 
+      "BALANCE", "DEAL_TYPE", "DEAL_DATE"
+      )
+    values (#{dealId,jdbcType=VARCHAR}, #{bankcardId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{balance,jdbcType=DECIMAL}, #{dealType,jdbcType=VARCHAR}, #{dealDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.SysMainAccout">
+    insert into SYS_MAIN_ACCOUT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dealId != null">
+        "DEAL_ID",
+      </if>
+      <if test="bankcardId != null">
+        "BANKCARD_ID",
+      </if>
+      <if test="userId != null">
+        "USER_ID",
+      </if>
+      <if test="balance != null">
+        "BALANCE",
+      </if>
+      <if test="dealType != null">
+        "DEAL_TYPE",
+      </if>
+      <if test="dealDate != null">
+        "DEAL_DATE",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dealId != null">
+        #{dealId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankcardId != null">
+        #{bankcardId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="dealType != null">
+        #{dealType,jdbcType=VARCHAR},
+      </if>
+      <if test="dealDate != null">
+        #{dealDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.SysMainAccoutExample" resultType="java.lang.Long">
+    select count(*) from SYS_MAIN_ACCOUT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update SYS_MAIN_ACCOUT
+    <set>
+      <if test="record.dealId != null">
+        "DEAL_ID" = #{record.dealId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankcardId != null">
+        "BANKCARD_ID" = #{record.bankcardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.balance != null">
+        "BALANCE" = #{record.balance,jdbcType=DECIMAL},
+      </if>
+      <if test="record.dealType != null">
+        "DEAL_TYPE" = #{record.dealType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dealDate != null">
+        "DEAL_DATE" = #{record.dealDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update SYS_MAIN_ACCOUT
+    set "DEAL_ID" = #{record.dealId,jdbcType=VARCHAR},
+      "BANKCARD_ID" = #{record.bankcardId,jdbcType=VARCHAR},
+      "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      "BALANCE" = #{record.balance,jdbcType=DECIMAL},
+      "DEAL_TYPE" = #{record.dealType,jdbcType=VARCHAR},
+      "DEAL_DATE" = #{record.dealDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.SysMainAccout">
+    update SYS_MAIN_ACCOUT
+    <set>
+      <if test="bankcardId != null">
+        "BANKCARD_ID" = #{bankcardId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        "USER_ID" = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="balance != null">
+        "BALANCE" = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="dealType != null">
+        "DEAL_TYPE" = #{dealType,jdbcType=VARCHAR},
+      </if>
+      <if test="dealDate != null">
+        "DEAL_DATE" = #{dealDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where "DEAL_ID" = #{dealId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.SysMainAccout">
+    update SYS_MAIN_ACCOUT
+    set "BANKCARD_ID" = #{bankcardId,jdbcType=VARCHAR},
+      "USER_ID" = #{userId,jdbcType=VARCHAR},
+      "BALANCE" = #{balance,jdbcType=DECIMAL},
+      "DEAL_TYPE" = #{dealType,jdbcType=VARCHAR},
+      "DEAL_DATE" = #{dealDate,jdbcType=TIMESTAMP}
+    where "DEAL_ID" = #{dealId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.UserAccountAssetsMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.UserAccountAssets">
+    <id column="ACCOUNT_ID" jdbcType="DECIMAL" property="accountId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="ACCOUNT_BALANCE" jdbcType="VARCHAR" property="accountBalance" />
+    <result column="ACCOUNT_FREEZE" jdbcType="VARCHAR" property="accountFreeze" />
+    <result column="ACCOUNT_DUE" jdbcType="VARCHAR" property="accountDue" />
+    <result column="ACCOUNT_PAID" jdbcType="VARCHAR" property="accountPaid" />
+    <result column="TOTAL_MONEY" jdbcType="VARCHAR" property="totalMoney" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "ACCOUNT_ID", "USER_ID", "ACCOUNT_BALANCE", "ACCOUNT_FREEZE", "ACCOUNT_DUE", "ACCOUNT_PAID", 
+    "TOTAL_MONEY"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.UserAccountAssetsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USER_ACCOUNT_ASSETS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from USER_ACCOUNT_ASSETS
+    where "ACCOUNT_ID" = #{accountId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+    delete from USER_ACCOUNT_ASSETS
+    where "ACCOUNT_ID" = #{accountId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.UserAccountAssetsExample">
+    delete from USER_ACCOUNT_ASSETS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.UserAccountAssets">
+    insert into USER_ACCOUNT_ASSETS ("ACCOUNT_ID", "USER_ID", "ACCOUNT_BALANCE", 
+      "ACCOUNT_FREEZE", "ACCOUNT_DUE", "ACCOUNT_PAID", 
+      "TOTAL_MONEY")
+    values (#{accountId,jdbcType=DECIMAL}, #{userId,jdbcType=VARCHAR}, #{accountBalance,jdbcType=VARCHAR}, 
+      #{accountFreeze,jdbcType=VARCHAR}, #{accountDue,jdbcType=VARCHAR}, #{accountPaid,jdbcType=VARCHAR}, 
+      #{totalMoney,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.UserAccountAssets">
+    insert into USER_ACCOUNT_ASSETS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        "ACCOUNT_ID",
+      </if>
+      <if test="userId != null">
+        "USER_ID",
+      </if>
+      <if test="accountBalance != null">
+        "ACCOUNT_BALANCE",
+      </if>
+      <if test="accountFreeze != null">
+        "ACCOUNT_FREEZE",
+      </if>
+      <if test="accountDue != null">
+        "ACCOUNT_DUE",
+      </if>
+      <if test="accountPaid != null">
+        "ACCOUNT_PAID",
+      </if>
+      <if test="totalMoney != null">
+        "TOTAL_MONEY",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        #{accountId,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBalance != null">
+        #{accountBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="accountFreeze != null">
+        #{accountFreeze,jdbcType=VARCHAR},
+      </if>
+      <if test="accountDue != null">
+        #{accountDue,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPaid != null">
+        #{accountPaid,jdbcType=VARCHAR},
+      </if>
+      <if test="totalMoney != null">
+        #{totalMoney,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.UserAccountAssetsExample" resultType="java.lang.Long">
+    select count(*) from USER_ACCOUNT_ASSETS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update USER_ACCOUNT_ASSETS
+    <set>
+      <if test="record.accountId != null">
+        "ACCOUNT_ID" = #{record.accountId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.userId != null">
+        "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountBalance != null">
+        "ACCOUNT_BALANCE" = #{record.accountBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountFreeze != null">
+        "ACCOUNT_FREEZE" = #{record.accountFreeze,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountDue != null">
+        "ACCOUNT_DUE" = #{record.accountDue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountPaid != null">
+        "ACCOUNT_PAID" = #{record.accountPaid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalMoney != null">
+        "TOTAL_MONEY" = #{record.totalMoney,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update USER_ACCOUNT_ASSETS
+    set "ACCOUNT_ID" = #{record.accountId,jdbcType=DECIMAL},
+      "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      "ACCOUNT_BALANCE" = #{record.accountBalance,jdbcType=VARCHAR},
+      "ACCOUNT_FREEZE" = #{record.accountFreeze,jdbcType=VARCHAR},
+      "ACCOUNT_DUE" = #{record.accountDue,jdbcType=VARCHAR},
+      "ACCOUNT_PAID" = #{record.accountPaid,jdbcType=VARCHAR},
+      "TOTAL_MONEY" = #{record.totalMoney,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.UserAccountAssets">
+    update USER_ACCOUNT_ASSETS
+    <set>
+      <if test="userId != null">
+        "USER_ID" = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBalance != null">
+        "ACCOUNT_BALANCE" = #{accountBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="accountFreeze != null">
+        "ACCOUNT_FREEZE" = #{accountFreeze,jdbcType=VARCHAR},
+      </if>
+      <if test="accountDue != null">
+        "ACCOUNT_DUE" = #{accountDue,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPaid != null">
+        "ACCOUNT_PAID" = #{accountPaid,jdbcType=VARCHAR},
+      </if>
+      <if test="totalMoney != null">
+        "TOTAL_MONEY" = #{totalMoney,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "ACCOUNT_ID" = #{accountId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.UserAccountAssets">
+    update USER_ACCOUNT_ASSETS
+    set "USER_ID" = #{userId,jdbcType=VARCHAR},
+      "ACCOUNT_BALANCE" = #{accountBalance,jdbcType=VARCHAR},
+      "ACCOUNT_FREEZE" = #{accountFreeze,jdbcType=VARCHAR},
+      "ACCOUNT_DUE" = #{accountDue,jdbcType=VARCHAR},
+      "ACCOUNT_PAID" = #{accountPaid,jdbcType=VARCHAR},
+      "TOTAL_MONEY" = #{totalMoney,jdbcType=VARCHAR}
+    where "ACCOUNT_ID" = #{accountId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.UserCreditLimitMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.UserCreditLimit">
+    <id column="LIMIT_CODE" jdbcType="VARCHAR" property="limitCode" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="CREDIT_LIMIT" jdbcType="VARCHAR" property="creditLimit" />
+    <result column="CREDIT_GRADE" jdbcType="VARCHAR" property="creditGrade" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "LIMIT_CODE", "USER_ID", "CREDIT_LIMIT", "CREDIT_GRADE"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.UserCreditLimitExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USER_CREDIT_LIMIT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from USER_CREDIT_LIMIT
+    where "LIMIT_CODE" = #{limitCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from USER_CREDIT_LIMIT
+    where "LIMIT_CODE" = #{limitCode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.UserCreditLimitExample">
+    delete from USER_CREDIT_LIMIT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.UserCreditLimit">
+    insert into USER_CREDIT_LIMIT ("LIMIT_CODE", "USER_ID", "CREDIT_LIMIT", 
+      "CREDIT_GRADE")
+    values (#{limitCode,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{creditLimit,jdbcType=VARCHAR}, 
+      #{creditGrade,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.UserCreditLimit">
+    insert into USER_CREDIT_LIMIT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="limitCode != null">
+        "LIMIT_CODE",
+      </if>
+      <if test="userId != null">
+        "USER_ID",
+      </if>
+      <if test="creditLimit != null">
+        "CREDIT_LIMIT",
+      </if>
+      <if test="creditGrade != null">
+        "CREDIT_GRADE",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="limitCode != null">
+        #{limitCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditLimit != null">
+        #{creditLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="creditGrade != null">
+        #{creditGrade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.UserCreditLimitExample" resultType="java.lang.Long">
+    select count(*) from USER_CREDIT_LIMIT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update USER_CREDIT_LIMIT
+    <set>
+      <if test="record.limitCode != null">
+        "LIMIT_CODE" = #{record.limitCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditLimit != null">
+        "CREDIT_LIMIT" = #{record.creditLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creditGrade != null">
+        "CREDIT_GRADE" = #{record.creditGrade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update USER_CREDIT_LIMIT
+    set "LIMIT_CODE" = #{record.limitCode,jdbcType=VARCHAR},
+      "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      "CREDIT_LIMIT" = #{record.creditLimit,jdbcType=VARCHAR},
+      "CREDIT_GRADE" = #{record.creditGrade,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.UserCreditLimit">
+    update USER_CREDIT_LIMIT
+    <set>
+      <if test="userId != null">
+        "USER_ID" = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditLimit != null">
+        "CREDIT_LIMIT" = #{creditLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="creditGrade != null">
+        "CREDIT_GRADE" = #{creditGrade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "LIMIT_CODE" = #{limitCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.UserCreditLimit">
+    update USER_CREDIT_LIMIT
+    set "USER_ID" = #{userId,jdbcType=VARCHAR},
+      "CREDIT_LIMIT" = #{creditLimit,jdbcType=VARCHAR},
+      "CREDIT_GRADE" = #{creditGrade,jdbcType=VARCHAR}
+    where "LIMIT_CODE" = #{limitCode,jdbcType=VARCHAR}
+  </update>
+</mapper>

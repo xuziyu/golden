@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+
+		<link rel="stylesheet" type="text/css" href="/golden/resource/third/esayUI/themes/default/easyui.css">
+
+<script type="text/javascript" src="/golden/resource/third/esayUI/jquery.min.js"></script>
+<script type="text/javascript" src="/golden/resource/third/esayUI/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/golden/resource/third/esayUI/locale/easyui-lang-zh_CN.js"></script>
+
+		<style type="text/css">
+			.menu.main {
+				width: 100%;
+				margin-left: -8px;
+				border-style: none;
+				/*  padding: 0px; */
+			}
+			
+			.menu.main li {
+				padding-left: 16px;
+				list-style: none;
+				width: 100%;
+				height: 40px;
+				line-height: 40px;
+				border-bottom: 1px solid #e1e1e8;
+			}
+		</style>
+
+		<script>
+			//		 $(window).resize(function () {  
+			//       $('#tabs').tabs({  
+			//           width: $("#tabs").parent().width(),  
+			//           height: "auto"  
+			//       });  
+			//   })  
+
+			var index = 0;
+
+			function addTab(obj) {
+				index++;
+				$('#tabs').tabs('add', {
+					title: obj.attr('tab-title'),
+					//content:'<div style="height:1000px">a</div>',
+					content: '<iframe name="indextab" scrolling="auto" src="' + obj.attr('href') + '" frameborder="0" style="width:100%;height:99%;"></iframe>',
+					closable: true
+				});
+			}
+
+			function removePanel() {
+				var tab = $('#tabs').tabs('getSelected');
+				if(tab) {
+					var index = $('#tabs').tabs('getTabIndex', tab);
+					$('#tabs').tabs('close', index);
+				}
+			}
+
+			$(function() {
+				$('.menu li').click(function() {
+					addTab($(this));
+				});
+			});
+		</script>
+	</head>
+
+	<body class="easyui-layout">
+		<div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">黄金宝</div>
+		<div data-options="region:'west',split:true,title:'系统'" style="width:150px;">
+			<div class="easyui-accordion" data-options="fit:true,border:false">
+				<div title="贷款管理" data-options="selected:true" style="padding:0px;">
+					<ul class="menu main">
+						<li tab-title='贷前' href='admin/LoanManage/page.action'>实名确认</li>
+						<li tab-title='贷中' href='admin/Loaning/page.action'>借款申请管理（贷中）</li>
+						<li tab-title='贷后' href='admin/bas_user/page.action'>还款管理（贷后）</li>
+						<li tab-title='贷款统计' href='admin/SysMainAccout/page.action'>贷款统计</li>
+						<li tab-title='已还款' href='admin/BasBorrowMoney/page.action'>已还款</li>
+						<li tab-title='逾期' href='admin/BasBorrowMoney/page.action'>逾期管理 </li>	
+					</ul>
+				</div>
+				<div title="认证管理" style="padding:0px;">
+
+					<ul class="menu main">
+						<li tab-title='实名认证' href='admin/user/page.action'>实名认证</li>
+						<li tab-title='手机认证' href='admin/education/page.action'>手机认证</li>
+						<li tab-title='证明材料' href='admin/material/page.action'>证明材料</li>
+						<li tab-title='电话认证' href='admin/telephone/page.action'>电话认证</li>
+					</ul>                 
+
+				</div>
+				<div title="客户管理" style="padding:10px">
+					<ul class="menu main">
+						<li tab-title='客户证明材料' href='grid.html'>客户证明材料</li>
+						<li tab-title='客户信息管理' href='grid.html'>客户信息管理</li>
+						<li tab-title='用户管理' href='grid.html'>用户管理</li>
+						<li tab-title='信用管理' href='grid.html'>信用管理</li>
+					</ul>  
+				</div>
+				<div title="系统设置" style="padding:10px">
+					<ul class="menu main">
+						<li tab-title='系统设置' href='grid.html'>系统设置</li>
+						<li tab-title='数据库管理' href='grid.html'>数据库管理</li>
+						<li tab-title='部门管理' href='admin/department/page.action'>部门管理</li>
+						<li tab-title='手续费管理' href='admin/poundage/page.action'>手续费管理</li>
+						<li tab-title='交易管理' href='admin/trade/page.action'>交易管理</li>
+					</ul>  
+				</div>
+				<div title="投资管理" style="padding:10px">
+					<ul class="menu main">
+						<li tab-title='投资统计' href='grid.html'>投资统计</li>
+						<li tab-title='投资收益' href='grid.html'>投资收益</li>
+						<li tab-title='投资期限' href='grid.html'>投资期限</li>
+						<li tab-title='投资推荐' href='grid.html'>投资推荐</li>
+					</ul>  
+				</div>
+			</div>
+
+		</div>
+		<!--<div data-options="region:'east',split:true,collapsed:true,title:'East'" style="width:100px;padding:10px;">east region</div>-->
+		<!--<div data-options="region:'south',border:false" style="height:50px;background:#A9FACD;padding:10px;">south region</div>-->
+		<div data-options="region:'center'">
+
+			<div id="tabs" class="easyui-tabs" fit="true" border="false">
+				<div title="欢迎使用" style="padding: 20px; overflow: hidden;" id="home">
+					<h1>欢迎来到黄金宝后台管理系统</h1>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

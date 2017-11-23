@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.BasRepaymentMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.BasRepayment">
+    <id column="REPAY_ID" jdbcType="VARCHAR" property="repayId" />
+    <result column="REPAY_CODE" jdbcType="VARCHAR" property="repayCode" />
+    <result column="REPAY_DATE" jdbcType="TIMESTAMP" property="repayDate" />
+    <result column="REPAY_STATE" jdbcType="VARCHAR" property="repayState" />
+    <result column="REPAY_TIME" jdbcType="VARCHAR" property="repayTime" />
+    <result column="REPAY_REMARK1" jdbcType="VARCHAR" property="repayRemark1" />
+    <result column="REPAY_REMARK2" jdbcType="VARCHAR" property="repayRemark2" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "REPAY_ID", "REPAY_CODE", "REPAY_DATE", "REPAY_STATE", "REPAY_TIME", "REPAY_REMARK1", 
+    "REPAY_REMARK2"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.BasRepaymentExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BAS_REPAYMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from BAS_REPAYMENT
+    where "REPAY_ID" = #{repayId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from BAS_REPAYMENT
+    where "REPAY_ID" = #{repayId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.BasRepaymentExample">
+    delete from BAS_REPAYMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.BasRepayment">
+    insert into BAS_REPAYMENT ("REPAY_ID", "REPAY_CODE", "REPAY_DATE", 
+      "REPAY_STATE", "REPAY_TIME", "REPAY_REMARK1", 
+      "REPAY_REMARK2")
+    values (#{repayId,jdbcType=VARCHAR}, #{repayCode,jdbcType=VARCHAR}, #{repayDate,jdbcType=TIMESTAMP}, 
+      #{repayState,jdbcType=VARCHAR}, #{repayTime,jdbcType=VARCHAR}, #{repayRemark1,jdbcType=VARCHAR}, 
+      #{repayRemark2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.BasRepayment">
+    insert into BAS_REPAYMENT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="repayId != null">
+        "REPAY_ID",
+      </if>
+      <if test="repayCode != null">
+        "REPAY_CODE",
+      </if>
+      <if test="repayDate != null">
+        "REPAY_DATE",
+      </if>
+      <if test="repayState != null">
+        "REPAY_STATE",
+      </if>
+      <if test="repayTime != null">
+        "REPAY_TIME",
+      </if>
+      <if test="repayRemark1 != null">
+        "REPAY_REMARK1",
+      </if>
+      <if test="repayRemark2 != null">
+        "REPAY_REMARK2",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="repayId != null">
+        #{repayId,jdbcType=VARCHAR},
+      </if>
+      <if test="repayCode != null">
+        #{repayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="repayDate != null">
+        #{repayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repayState != null">
+        #{repayState,jdbcType=VARCHAR},
+      </if>
+      <if test="repayTime != null">
+        #{repayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="repayRemark1 != null">
+        #{repayRemark1,jdbcType=VARCHAR},
+      </if>
+      <if test="repayRemark2 != null">
+        #{repayRemark2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.BasRepaymentExample" resultType="java.lang.Long">
+    select count(*) from BAS_REPAYMENT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update BAS_REPAYMENT
+    <set>
+      <if test="record.repayId != null">
+        "REPAY_ID" = #{record.repayId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repayCode != null">
+        "REPAY_CODE" = #{record.repayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repayDate != null">
+        "REPAY_DATE" = #{record.repayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.repayState != null">
+        "REPAY_STATE" = #{record.repayState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repayTime != null">
+        "REPAY_TIME" = #{record.repayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repayRemark1 != null">
+        "REPAY_REMARK1" = #{record.repayRemark1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.repayRemark2 != null">
+        "REPAY_REMARK2" = #{record.repayRemark2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update BAS_REPAYMENT
+    set "REPAY_ID" = #{record.repayId,jdbcType=VARCHAR},
+      "REPAY_CODE" = #{record.repayCode,jdbcType=VARCHAR},
+      "REPAY_DATE" = #{record.repayDate,jdbcType=TIMESTAMP},
+      "REPAY_STATE" = #{record.repayState,jdbcType=VARCHAR},
+      "REPAY_TIME" = #{record.repayTime,jdbcType=VARCHAR},
+      "REPAY_REMARK1" = #{record.repayRemark1,jdbcType=VARCHAR},
+      "REPAY_REMARK2" = #{record.repayRemark2,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.BasRepayment">
+    update BAS_REPAYMENT
+    <set>
+      <if test="repayCode != null">
+        "REPAY_CODE" = #{repayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="repayDate != null">
+        "REPAY_DATE" = #{repayDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repayState != null">
+        "REPAY_STATE" = #{repayState,jdbcType=VARCHAR},
+      </if>
+      <if test="repayTime != null">
+        "REPAY_TIME" = #{repayTime,jdbcType=VARCHAR},
+      </if>
+      <if test="repayRemark1 != null">
+        "REPAY_REMARK1" = #{repayRemark1,jdbcType=VARCHAR},
+      </if>
+      <if test="repayRemark2 != null">
+        "REPAY_REMARK2" = #{repayRemark2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "REPAY_ID" = #{repayId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.BasRepayment">
+    update BAS_REPAYMENT
+    set "REPAY_CODE" = #{repayCode,jdbcType=VARCHAR},
+      "REPAY_DATE" = #{repayDate,jdbcType=TIMESTAMP},
+      "REPAY_STATE" = #{repayState,jdbcType=VARCHAR},
+      "REPAY_TIME" = #{repayTime,jdbcType=VARCHAR},
+      "REPAY_REMARK1" = #{repayRemark1,jdbcType=VARCHAR},
+      "REPAY_REMARK2" = #{repayRemark2,jdbcType=VARCHAR}
+    where "REPAY_ID" = #{repayId,jdbcType=VARCHAR}
+  </update>
+</mapper>

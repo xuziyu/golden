@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.UserWithdrawMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.UserWithdraw">
+    <id column="WITHDRAW_ID" jdbcType="VARCHAR" property="withdrawId" />
+    <result column="WITHDRAW_ACCOUNT" jdbcType="VARCHAR" property="withdrawAccount" />
+    <result column="WITHDRAW_BANK" jdbcType="VARCHAR" property="withdrawBank" />
+    <result column="WITHDRAW_MONEY" jdbcType="DECIMAL" property="withdrawMoney" />
+    <result column="REAL_MONEY" jdbcType="DECIMAL" property="realMoney" />
+    <result column="WITHDRAW_SERVICE_CHARGE" jdbcType="DECIMAL" property="withdrawServiceCharge" />
+    <result column="WITHDRAW_TIME" jdbcType="TIMESTAMP" property="withdrawTime" />
+    <result column="INTO_TIME" jdbcType="TIMESTAMP" property="intoTime" />
+    <result column="WITHDRAW_STATE" jdbcType="VARCHAR" property="withdrawState" />
+    <result column="AUDITOR_ID" jdbcType="VARCHAR" property="auditorId" />
+    <result column="AUDITOR" jdbcType="VARCHAR" property="auditor" />
+    <result column="AUDIT_TIME" jdbcType="TIMESTAMP" property="auditTime" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "WITHDRAW_ID", "WITHDRAW_ACCOUNT", "WITHDRAW_BANK", "WITHDRAW_MONEY", "REAL_MONEY", 
+    "WITHDRAW_SERVICE_CHARGE", "WITHDRAW_TIME", "INTO_TIME", "WITHDRAW_STATE", "AUDITOR_ID", 
+    "AUDITOR", "AUDIT_TIME", "REMARK"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.UserWithdrawExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USER_WITHDRAW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from USER_WITHDRAW
+    where "WITHDRAW_ID" = #{withdrawId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from USER_WITHDRAW
+    where "WITHDRAW_ID" = #{withdrawId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.UserWithdrawExample">
+    delete from USER_WITHDRAW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.UserWithdraw">
+    insert into USER_WITHDRAW ("WITHDRAW_ID", "WITHDRAW_ACCOUNT", "WITHDRAW_BANK", 
+      "WITHDRAW_MONEY", "REAL_MONEY", "WITHDRAW_SERVICE_CHARGE", 
+      "WITHDRAW_TIME", "INTO_TIME", "WITHDRAW_STATE", 
+      "AUDITOR_ID", "AUDITOR", "AUDIT_TIME", 
+      "REMARK")
+    values (#{withdrawId,jdbcType=VARCHAR}, #{withdrawAccount,jdbcType=VARCHAR}, #{withdrawBank,jdbcType=VARCHAR}, 
+      #{withdrawMoney,jdbcType=DECIMAL}, #{realMoney,jdbcType=DECIMAL}, #{withdrawServiceCharge,jdbcType=DECIMAL}, 
+      #{withdrawTime,jdbcType=TIMESTAMP}, #{intoTime,jdbcType=TIMESTAMP}, #{withdrawState,jdbcType=VARCHAR}, 
+      #{auditorId,jdbcType=VARCHAR}, #{auditor,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.UserWithdraw">
+    insert into USER_WITHDRAW
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="withdrawId != null">
+        "WITHDRAW_ID",
+      </if>
+      <if test="withdrawAccount != null">
+        "WITHDRAW_ACCOUNT",
+      </if>
+      <if test="withdrawBank != null">
+        "WITHDRAW_BANK",
+      </if>
+      <if test="withdrawMoney != null">
+        "WITHDRAW_MONEY",
+      </if>
+      <if test="realMoney != null">
+        "REAL_MONEY",
+      </if>
+      <if test="withdrawServiceCharge != null">
+        "WITHDRAW_SERVICE_CHARGE",
+      </if>
+      <if test="withdrawTime != null">
+        "WITHDRAW_TIME",
+      </if>
+      <if test="intoTime != null">
+        "INTO_TIME",
+      </if>
+      <if test="withdrawState != null">
+        "WITHDRAW_STATE",
+      </if>
+      <if test="auditorId != null">
+        "AUDITOR_ID",
+      </if>
+      <if test="auditor != null">
+        "AUDITOR",
+      </if>
+      <if test="auditTime != null">
+        "AUDIT_TIME",
+      </if>
+      <if test="remark != null">
+        "REMARK",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="withdrawId != null">
+        #{withdrawId,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawAccount != null">
+        #{withdrawAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawBank != null">
+        #{withdrawBank,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawMoney != null">
+        #{withdrawMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="realMoney != null">
+        #{realMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="withdrawServiceCharge != null">
+        #{withdrawServiceCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="withdrawTime != null">
+        #{withdrawTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="intoTime != null">
+        #{intoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="withdrawState != null">
+        #{withdrawState,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorId != null">
+        #{auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null">
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.UserWithdrawExample" resultType="java.lang.Long">
+    select count(*) from USER_WITHDRAW
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update USER_WITHDRAW
+    <set>
+      <if test="record.withdrawId != null">
+        "WITHDRAW_ID" = #{record.withdrawId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.withdrawAccount != null">
+        "WITHDRAW_ACCOUNT" = #{record.withdrawAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.withdrawBank != null">
+        "WITHDRAW_BANK" = #{record.withdrawBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.withdrawMoney != null">
+        "WITHDRAW_MONEY" = #{record.withdrawMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.realMoney != null">
+        "REAL_MONEY" = #{record.realMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="record.withdrawServiceCharge != null">
+        "WITHDRAW_SERVICE_CHARGE" = #{record.withdrawServiceCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.withdrawTime != null">
+        "WITHDRAW_TIME" = #{record.withdrawTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.intoTime != null">
+        "INTO_TIME" = #{record.intoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.withdrawState != null">
+        "WITHDRAW_STATE" = #{record.withdrawState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditorId != null">
+        "AUDITOR_ID" = #{record.auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditor != null">
+        "AUDITOR" = #{record.auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditTime != null">
+        "AUDIT_TIME" = #{record.auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.remark != null">
+        "REMARK" = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update USER_WITHDRAW
+    set "WITHDRAW_ID" = #{record.withdrawId,jdbcType=VARCHAR},
+      "WITHDRAW_ACCOUNT" = #{record.withdrawAccount,jdbcType=VARCHAR},
+      "WITHDRAW_BANK" = #{record.withdrawBank,jdbcType=VARCHAR},
+      "WITHDRAW_MONEY" = #{record.withdrawMoney,jdbcType=DECIMAL},
+      "REAL_MONEY" = #{record.realMoney,jdbcType=DECIMAL},
+      "WITHDRAW_SERVICE_CHARGE" = #{record.withdrawServiceCharge,jdbcType=DECIMAL},
+      "WITHDRAW_TIME" = #{record.withdrawTime,jdbcType=TIMESTAMP},
+      "INTO_TIME" = #{record.intoTime,jdbcType=TIMESTAMP},
+      "WITHDRAW_STATE" = #{record.withdrawState,jdbcType=VARCHAR},
+      "AUDITOR_ID" = #{record.auditorId,jdbcType=VARCHAR},
+      "AUDITOR" = #{record.auditor,jdbcType=VARCHAR},
+      "AUDIT_TIME" = #{record.auditTime,jdbcType=TIMESTAMP},
+      "REMARK" = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.UserWithdraw">
+    update USER_WITHDRAW
+    <set>
+      <if test="withdrawAccount != null">
+        "WITHDRAW_ACCOUNT" = #{withdrawAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawBank != null">
+        "WITHDRAW_BANK" = #{withdrawBank,jdbcType=VARCHAR},
+      </if>
+      <if test="withdrawMoney != null">
+        "WITHDRAW_MONEY" = #{withdrawMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="realMoney != null">
+        "REAL_MONEY" = #{realMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="withdrawServiceCharge != null">
+        "WITHDRAW_SERVICE_CHARGE" = #{withdrawServiceCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="withdrawTime != null">
+        "WITHDRAW_TIME" = #{withdrawTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="intoTime != null">
+        "INTO_TIME" = #{intoTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="withdrawState != null">
+        "WITHDRAW_STATE" = #{withdrawState,jdbcType=VARCHAR},
+      </if>
+      <if test="auditorId != null">
+        "AUDITOR_ID" = #{auditorId,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null">
+        "AUDITOR" = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditTime != null">
+        "AUDIT_TIME" = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        "REMARK" = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "WITHDRAW_ID" = #{withdrawId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.UserWithdraw">
+    update USER_WITHDRAW
+    set "WITHDRAW_ACCOUNT" = #{withdrawAccount,jdbcType=VARCHAR},
+      "WITHDRAW_BANK" = #{withdrawBank,jdbcType=VARCHAR},
+      "WITHDRAW_MONEY" = #{withdrawMoney,jdbcType=DECIMAL},
+      "REAL_MONEY" = #{realMoney,jdbcType=DECIMAL},
+      "WITHDRAW_SERVICE_CHARGE" = #{withdrawServiceCharge,jdbcType=DECIMAL},
+      "WITHDRAW_TIME" = #{withdrawTime,jdbcType=TIMESTAMP},
+      "INTO_TIME" = #{intoTime,jdbcType=TIMESTAMP},
+      "WITHDRAW_STATE" = #{withdrawState,jdbcType=VARCHAR},
+      "AUDITOR_ID" = #{auditorId,jdbcType=VARCHAR},
+      "AUDITOR" = #{auditor,jdbcType=VARCHAR},
+      "AUDIT_TIME" = #{auditTime,jdbcType=TIMESTAMP},
+      "REMARK" = #{remark,jdbcType=VARCHAR}
+    where "WITHDRAW_ID" = #{withdrawId,jdbcType=VARCHAR}
+  </update>
+</mapper>

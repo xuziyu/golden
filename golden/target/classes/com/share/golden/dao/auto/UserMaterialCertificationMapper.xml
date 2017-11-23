@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.share.golden.dao.auto.UserMaterialCertificationMapper">
+  <resultMap id="BaseResultMap" type="com.share.golden.entity.UserMaterialCertification">
+    <id column="MATERIA_ID" jdbcType="VARCHAR" property="materiaId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="MATERIA_TYPE" jdbcType="VARCHAR" property="materiaType" />
+    <result column="MATERIA" jdbcType="VARCHAR" property="materia" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="VALID" jdbcType="VARCHAR" property="valid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    "MATERIA_ID", "USER_ID", "MATERIA_TYPE", "MATERIA", "CREATE_DATE", "VALID"
+  </sql>
+  <select id="selectByExample" parameterType="com.share.golden.entity.UserMaterialCertificationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from USER_MATERIAL_CERTIFICATION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from USER_MATERIAL_CERTIFICATION
+    where "MATERIA_ID" = #{materiaId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from USER_MATERIAL_CERTIFICATION
+    where "MATERIA_ID" = #{materiaId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.share.golden.entity.UserMaterialCertificationExample">
+    delete from USER_MATERIAL_CERTIFICATION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.share.golden.entity.UserMaterialCertification">
+    insert into USER_MATERIAL_CERTIFICATION ("MATERIA_ID", "USER_ID", "MATERIA_TYPE", 
+      "MATERIA", "CREATE_DATE", "VALID"
+      )
+    values (#{materiaId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{materiaType,jdbcType=VARCHAR}, 
+      #{materia,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{valid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.share.golden.entity.UserMaterialCertification">
+    insert into USER_MATERIAL_CERTIFICATION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="materiaId != null">
+        "MATERIA_ID",
+      </if>
+      <if test="userId != null">
+        "USER_ID",
+      </if>
+      <if test="materiaType != null">
+        "MATERIA_TYPE",
+      </if>
+      <if test="materia != null">
+        "MATERIA",
+      </if>
+      <if test="createDate != null">
+        "CREATE_DATE",
+      </if>
+      <if test="valid != null">
+        "VALID",
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="materiaId != null">
+        #{materiaId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="materiaType != null">
+        #{materiaType,jdbcType=VARCHAR},
+      </if>
+      <if test="materia != null">
+        #{materia,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="valid != null">
+        #{valid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.share.golden.entity.UserMaterialCertificationExample" resultType="java.lang.Long">
+    select count(*) from USER_MATERIAL_CERTIFICATION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update USER_MATERIAL_CERTIFICATION
+    <set>
+      <if test="record.materiaId != null">
+        "MATERIA_ID" = #{record.materiaId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materiaType != null">
+        "MATERIA_TYPE" = #{record.materiaType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materia != null">
+        "MATERIA" = #{record.materia,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        "CREATE_DATE" = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.valid != null">
+        "VALID" = #{record.valid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update USER_MATERIAL_CERTIFICATION
+    set "MATERIA_ID" = #{record.materiaId,jdbcType=VARCHAR},
+      "USER_ID" = #{record.userId,jdbcType=VARCHAR},
+      "MATERIA_TYPE" = #{record.materiaType,jdbcType=VARCHAR},
+      "MATERIA" = #{record.materia,jdbcType=VARCHAR},
+      "CREATE_DATE" = #{record.createDate,jdbcType=TIMESTAMP},
+      "VALID" = #{record.valid,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.share.golden.entity.UserMaterialCertification">
+    update USER_MATERIAL_CERTIFICATION
+    <set>
+      <if test="userId != null">
+        "USER_ID" = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="materiaType != null">
+        "MATERIA_TYPE" = #{materiaType,jdbcType=VARCHAR},
+      </if>
+      <if test="materia != null">
+        "MATERIA" = #{materia,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        "CREATE_DATE" = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="valid != null">
+        "VALID" = #{valid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where "MATERIA_ID" = #{materiaId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.share.golden.entity.UserMaterialCertification">
+    update USER_MATERIAL_CERTIFICATION
+    set "USER_ID" = #{userId,jdbcType=VARCHAR},
+      "MATERIA_TYPE" = #{materiaType,jdbcType=VARCHAR},
+      "MATERIA" = #{materia,jdbcType=VARCHAR},
+      "CREATE_DATE" = #{createDate,jdbcType=TIMESTAMP},
+      "VALID" = #{valid,jdbcType=VARCHAR}
+    where "MATERIA_ID" = #{materiaId,jdbcType=VARCHAR}
+  </update>
+</mapper>
